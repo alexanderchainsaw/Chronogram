@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "chronogram"
+version = "0.1.0"
+description = ""
+authors = ["alexanderchainsaw <alexanderkolesov.contact@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aiogram = "^3.13.1"
+python-dotenv = "^1.0.1"
+sqlalchemy = "^2.0.36"
+structlog = "^24.4.0"
+pytest = "^8.3.3"
+python-dateutil = "^2.9.0.post0"
+asyncpg = "^0.30.0"
+pillow = "^11.0.0"
+parse = "^1.20.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
