@@ -19,8 +19,8 @@ async def main():
     await init_postgresql()
     dp = Dispatcher(storage=MemoryStorage())
 
-    dp.include_routers(general_router, settings_router, payments_router, inbox_router, admin_router,
-                       timecapsule_router, delete_router, common_router)
+    dp.include_routers(general_router, settings_router, payments_router, inbox_router, admin_router, delete_router,
+                       timecapsule_router, common_router)
     dp.update.outer_middleware(StructLoggingMiddleware(logger=config.LOGGER))
     dp.message.outer_middleware(LocalizationMiddleware())
     dp.callback_query.outer_middleware(LocalizationMiddleware())

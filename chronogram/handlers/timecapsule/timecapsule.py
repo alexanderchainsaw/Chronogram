@@ -39,6 +39,7 @@ async def create_timecapsule(message: Message, state: FSMContext, l10n: L10N) ->
                              ).message_id
     await state.set_state(TimeCapsuleCreate.choosing_content)
     await state.update_data(prompt_content_msg_id=prompt_content_msg_id)
+    await state.update_data(messages_to_delete=(prompt_content_msg_id,))
     await message.delete()
 
 
