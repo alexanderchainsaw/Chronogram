@@ -22,10 +22,8 @@ async def perform_state_clear(state: FSMContext, uid: int):
             except aiogram.exceptions.TelegramBadRequest as err:
                 if "message to delete not found" in err.message:
                     config.LOGGER.warning('Message to delete not found error')
-                    pass
                 else:
                     config.LOGGER.warning(f'Unknown error on message delete: {err.message}')
-                    pass
     except KeyError:
         config.LOGGER.debug(f'expected KeyError, No messages to delete')
     await state.clear()
@@ -34,6 +32,10 @@ async def perform_state_clear(state: FSMContext, uid: int):
 async def user_space_remaining_percent(tg_uid) -> str:
     space_taken = await db_req.get_user_attr(tg_uid=tg_uid, col=ChronogramUser.space_taken)
     subscribed = await db_req.get_user_attr(tg_uid=tg_uid, col=ChronogramUser.subscription)
+    return await _format_user_space_remaining_percent(space_taken=space_taken, subscribed=subscribed)
+
+
+async def _format_user_space_remaining_percent(space_taken: int, subscribed: bool) -> str:
     if subscribed:
         return f"{int(100 - (space_taken / PREMIUM_USER_SPACE * 100))}%"
     return f"{int(100 - (space_taken / DEFAULT_USER_SPACE * 100))}%"
@@ -42,6 +44,10 @@ async def user_space_remaining_percent(tg_uid) -> str:
 async def user_space_remaining_mb(tg_uid) -> str:
     space_taken = await db_req.get_user_attr(tg_uid=tg_uid, col=ChronogramUser.space_taken)
     subscribed = await db_req.get_user_attr(tg_uid=tg_uid, col=ChronogramUser.subscription)
+    return await _format_user_space_remaining_mb(subscribed=subscribed, space_taken=space_taken)
+
+
+async def _format_user_space_remaining_mb(space_taken: int, subscribed: bool) -> str:
     if subscribed:
         if space_taken == 0:
             return "10<b>|</b>10MB"
