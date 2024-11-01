@@ -18,6 +18,7 @@ asyncpg = "^0.30.0"
 pillow = "^11.0.0"
 parse = "^1.20.2"
 cryptography = "^43.0.3"
+flake8 = "^7.1.1"
 
 
 [build-system]
