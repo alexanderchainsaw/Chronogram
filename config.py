@@ -6,6 +6,7 @@ from structlog.types import FilteringBoundLogger
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
 from aiogram import Bot
+from cryptography.fernet import Fernet
 
 load_dotenv()
 
@@ -15,7 +16,7 @@ class Config:
     TESTING: int = int(os.getenv('TESTING'))
     PROD_API_TOKEN: str = os.getenv('PROD_API_TOKEN')
     TEST_API_TOKEN: str = os.getenv('TEST_API_TOKEN')
-    FERNET_KEY: str = os.getenv('FERNET_KEY')
+    FERNET: Fernet = Fernet(key=os.getenv('FERNET_KEY'))
     ADMIN_IDS: tuple = tuple(os.getenv('ADMIN_IDS').split())
     PG_LOGIN: str = os.getenv('PG_LOGIN')
     PG_PASS: str = os.getenv('PG_PASS')

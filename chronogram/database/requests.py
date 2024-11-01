@@ -13,7 +13,7 @@ from chronogram.database.schema import tc_image_data
 from sqlalchemy import select, insert, update, delete
 from sqlalchemy import desc
 
-fernet = config.FERNET_KEY
+fernet = config.FERNET
 
 
 async def get_uid_by_tg_uid(tg_uid: int) -> int:

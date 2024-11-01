@@ -8,8 +8,7 @@ from chronogram.settings_menu_models import SettingsCallback, SettingsMenuAction
 from chronogram.utils import user_space_remaining_mb, user_space_remaining_percent
 from chronogram.handlers.payments.schemas import SubscriptionMenuCallback, choose_duration_menu
 from chronogram.handlers.settings.utc_picker import start_utc_picker, UtcPickerCallback
-from chronogram.middlewares import L10N
-from chronogram.middlewares.l10n_data import LOC
+from chronogram.middlewares import L10N, get_l10n_by_lang
 
 
 async def get_init_settings_msg(tg_uid, l10n: L10N) -> str:
@@ -79,11 +78,12 @@ async def process_selection(callback: CallbackQuery, data: SettingsCallback, l10
             await callback.message.delete()
     if data.action.startswith(SettingsMenuActions.SELECT_LANGUAGE):
         new_lang = data.action.split('-')[1]
-        if new_lang == await db_req.get_user_attr(tg_uid=callback.from_user.id, col=ChronogramUser.language):
+        if new_lang == l10n.lang:
             await callback.answer()
         else:
+            l10n = await get_l10n_by_lang(new_lang)
             await db_req.edit_language(tg_uid=callback.from_user.id, new_lang=new_lang)
-            await callback.answer(text=LOC[new_lang]["/settings"]['language_change_success'])
+            await callback.answer(text=l10n.data["/settings"]['language_change_success'])
             await callback.message.edit_text(await get_init_settings_msg(callback.from_user.id, l10n=l10n))
             await callback.message.edit_reply_markup(reply_markup=await _select_language_menu(l10n=l10n))
     elif data.action.startswith(SettingsMenuActions.SELECT_UTC):

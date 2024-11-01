@@ -28,6 +28,7 @@ class UtcPickerActions(str, Enum):
 
 
 class UtcPickerCallback(CallbackData, prefix='utc_picker'):
+    tg_uid: int
     action: str = ''
     hour: int = 0
     minute: int = 0
@@ -72,7 +73,7 @@ async def start_utc_picker(data: UtcPickerCallback, l10n: L10N) -> InlineKeyboar
 
     keyboard[0] = [
         InlineKeyboardButton(
-            text=l10n.data['/settings']['utc_picker_display_value'].format(get_current_value(data)),
+            text=l10n.data['/settings']['utc_picker_display_value'].format(await get_current_value(data)),
             callback_data=UtcPickerCallback(
                 tg_uid=data.tg_uid,
                 action=UtcPickerActions.ignore,

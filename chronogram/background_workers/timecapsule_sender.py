@@ -47,7 +47,7 @@ async def get_formatted_msg_content(tg_uid: int, content: bytes, sent: datetime.
     if content:
         formatted_msg = l10n.data['/timecapsule']['received'].format(
             datetime.datetime.strftime(sent + datetime.timedelta(minutes=utc_diff),
-                                       '%H:%M %d.%m.%Y'), config.FERNET_KEY.decrypt(content).decode('utf-8'))
+                                       '%H:%M %d.%m.%Y'), config.FERNET.decrypt(content).decode('utf-8'))
     else:
         formatted_msg = l10n.data['/timecapsule']['received'].format(
             datetime.datetime.strftime(sent + datetime.timedelta(minutes=utc_diff),
@@ -59,7 +59,7 @@ async def send_timecapsule(tg_uid, sent, content, tc_id, photo, l10n: L10N):
 
     if photo:
         photo_data = await TC.get_timecapsule_image_data(tg_uid=tg_uid, tc_id=tc_id)
-        img = Image.frombytes(data=config.FERNET_KEY.decrypt(photo), mode=photo_data['mode'], size=photo_data['size'])
+        img = Image.frombytes(data=config.FERNET.decrypt(photo), mode=photo_data['mode'], size=photo_data['size'])
         # img = Image.open(io.BytesIO(photo))
         img.save(f'temp\\send_{tg_uid}.jpg')
         input_file = FSInputFile(f'temp\\send_{tg_uid}.jpg')

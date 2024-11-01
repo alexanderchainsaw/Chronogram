@@ -5,7 +5,7 @@ from aiogram.types import CallbackQuery
 import chronogram.database.requests as db_req
 from chronogram.database.schema import ChronogramUser
 from chronogram.database.requests import TimeCapsuleDatabaseActions as TC
-from handlers.timecapsule.photo_utils import PhotoReader
+from chronogram.photo_utils import PhotoReader
 from aiogram.types import Message
 from chronogram.middlewares import L10N
 

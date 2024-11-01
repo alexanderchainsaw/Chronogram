@@ -17,6 +17,7 @@ python-dateutil = "^2.9.0.post0"
 asyncpg = "^0.30.0"
 pillow = "^11.0.0"
 parse = "^1.20.2"
+cryptography = "^43.0.3"
 
 
 [build-system]

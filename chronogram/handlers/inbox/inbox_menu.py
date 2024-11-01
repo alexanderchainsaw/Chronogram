@@ -77,7 +77,7 @@ async def get_message_content_fmt(tc_id, tg_uid, l10n: L10N) -> str:
     send_t = (tc_data.send_timestamp + timedelta(minutes=utc_diff)).strftime('%H:%M %d.%m.%Y')
 
     if tc_data.text_content:
-        return l10n.data['/inbox']['timecapsule_data'].format(send_t, receive_t, config.FERNET_KEY.decrypt(
+        return l10n.data['/inbox']['timecapsule_data'].format(send_t, receive_t, config.FERNET.decrypt(
             tc_data.text_content).decode('utf-8'))
     return l10n.data['/inbox']['timecapsule_data'].format(send_t, receive_t, '')
 
@@ -178,7 +178,7 @@ async def process_selection(callback: CallbackQuery, data: InboxCallback, l10n: 
             photo = await TC.get_timecapsule_image(tg_uid=data.user_id, tc_id=tc_id)
             photo_data = await TC.get_timecapsule_image_data(tg_uid=data.user_id, tc_id=tc_id)
             if photo:
-                img = Image.frombytes(data=config.FERNET_KEY.decrypt(photo),
+                img = Image.frombytes(data=config.FERNET.decrypt(photo),
                                       mode=photo_data['mode'], size=photo_data['size'])
                 img.save(f'temp\\inbox_{data.user_id}.{tc_id}.jpg')
                 input_file = FSInputFile(f'temp\\inbox_{data.user_id}.{tc_id}.jpg')
