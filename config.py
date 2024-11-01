@@ -24,10 +24,8 @@ class Config:
     PG_HOST: str = os.getenv('PG_HOST')
     PG_PORT: str = os.getenv('PG_PORT')
     LOGGER: FilteringBoundLogger = get_logger()
-
-    def __post_init__(self):
-        self.BOT = Bot(token=self.TEST_API_TOKEN if self.TESTING else self.PROD_API_TOKEN,
-                       default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    BOT = Bot(token=TEST_API_TOKEN if TESTING else PROD_API_TOKEN,
+              default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
 
 config = Config()
