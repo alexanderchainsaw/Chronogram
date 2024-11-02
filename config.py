@@ -27,5 +27,12 @@ class Config:
     BOT = Bot(token=TEST_API_TOKEN if TESTING else PROD_API_TOKEN,
               default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
+    def __post_init__(self):
+        for key, val in self.__dict__.items():
+            if not val:
+                raise RuntimeError(f"Value {key} is empty")
+        if self.PROD_API_TOKEN == self.TEST_API_TOKEN:
+            raise RuntimeError(f"Same token for TEST and for PROD")
+
 
 config = Config()
