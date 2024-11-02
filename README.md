@@ -1,5 +1,6 @@
-# Chronogram
-A personal time capsule bot written in aiogram3
+# <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/logo.jpg?raw=true)</p>
+<b>Chronogram</b> - A personal time capsule bot written in aiogram3
+
 
 ![image](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
 ![image](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
