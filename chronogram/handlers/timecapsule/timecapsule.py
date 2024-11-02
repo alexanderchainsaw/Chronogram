@@ -256,6 +256,7 @@ async def message_sent(callback: CallbackQuery, l10n: L10N):
     await callback.answer(l10n.data['/timecapsule']['sent']
                           .format(await user_space_remaining_percent(tg_uid=callback.from_user.id)))
     await callback.message.delete()
+    config.LOGGER.info(f"User ...{str(callback.from_user.id)[5:]} sent timecapsule")
 
 
 @timecapsule_router.callback_query(F.data == 'send_cancel')

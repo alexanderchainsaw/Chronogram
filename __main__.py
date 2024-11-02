@@ -39,5 +39,6 @@ async def main():
     finally:
         await dp.stop_polling()
         await config.BOT.session.close()
+        config.LOGGER.info('Stopped polling, session closed')
 if __name__ == '__main__':
     asyncio.run(main())

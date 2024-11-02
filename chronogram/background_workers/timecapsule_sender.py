@@ -62,7 +62,6 @@ async def send_timecapsule(tg_uid, sent, content, tc_id, photo, l10n: L10N):
     if photo:
         photo_data = await TC.get_timecapsule_image_data(tg_uid=tg_uid, tc_id=tc_id)
         img = Image.frombytes(data=config.FERNET.decrypt(photo), mode=photo_data['mode'], size=photo_data['size'])
-        # img = Image.open(io.BytesIO(photo))
         img.save(f'temp\\send_{tg_uid}.jpg')
         input_file = FSInputFile(f'temp\\send_{tg_uid}.jpg')
         await config.BOT.send_photo(has_spoiler=True,

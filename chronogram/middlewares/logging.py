@@ -6,6 +6,7 @@ import structlog.typing
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Update
 
+
 HANDLED_STR = ["Unhandled", "Handled"]
 
 
@@ -80,6 +81,8 @@ class StructLoggingMiddleware(BaseMiddleware):
             process_result=True,
             spent_time_ms=round((time.time() - _started_processing_at) * 10000) / 10,
         )
+        if event.callback_query:
+            logger = logger.unbind('callback_data')
         if event.message:
             logger.info("Handled message")
         elif event.callback_query:
