@@ -27,23 +27,23 @@ class StructLoggingMiddleware(BaseMiddleware):
             message = event.message
             logger = logger.bind(
                 message_id=message.message_id,
-                chat_type=message.chat.type,
-                chat_id=message.chat.id,
+                # chat_type=message.chat.type,
+                chat_id=f"...{str(message.chat.id)[5:]}",
             )
             if message.from_user is not None:
-                logger = logger.bind(user_id=message.from_user.id)
+                logger = logger.bind(user_id=f"...{str(message.from_user.id)[5:]}")
             if message.text:
                 logger = logger.bind(text=message.text, entities=message.entities)
             if message.video:
                 logger = logger.bind(
-                    caption=message.caption,
+                    caption=message.caption[:5] + '...',
                     caption_entities=message.caption_entities,
                     video_id=message.video.file_id,
                     video_unique_id=message.video.file_unique_id,
                 )
             if message.photo:
                 logger = logger.bind(
-                    caption=message.caption,
+                    caption=message.caption[:5] + '...',
                     caption_entities=message.caption_entities,
                     photo_id=message.photo[-1].file_id,
                     photo_unique_id=message.photo[-1].file_unique_id,
@@ -54,7 +54,7 @@ class StructLoggingMiddleware(BaseMiddleware):
             logger = logger.bind(
                 callback_query_id=c.id,
                 callback_data=c.data,
-                user_id=c.from_user.id,
+                user_id=f"...{str(c.from_user.id)[5:]}",
                 inline_message_id=c.inline_message_id,
                 chat_instance=c.chat_instance,
             )
@@ -62,38 +62,19 @@ class StructLoggingMiddleware(BaseMiddleware):
                 logger = logger.bind(
                     message_id=c.message.message_id,
                     chat_type=c.message.chat.type,
-                    chat_id=c.message.chat.id,
+                    chat_id=f"...{str(c.message.chat.id)[5:]}",
                 )
             logger.debug("Received callback query")
         elif event.inline_query:
             query = event.inline_query
             logger = logger.bind(
                 query_id=query.id,
-                user_id=query.from_user.id,
+                user_id=f"...{str(query.from_user.id)[5:]}",
                 query=query.query,
                 offset=query.offset,
-                chat_type=query.chat_type,
                 location=query.location,
             )
             logger.debug("Received inline query")
-        elif event.my_chat_member:
-            upd = event.my_chat_member
-            logger = self.logger.bind(
-                user_id=upd.from_user.id,
-                chat_id=upd.chat.id,
-                old_state=upd.old_chat_member,
-                new_state=upd.new_chat_member,
-            )
-            logger.debug("Received my chat member update")
-        elif event.chat_member:
-            upd = event.chat_member
-            logger = logger.bind(
-                user_id=upd.from_user.id,
-                chat_id=upd.chat.id,
-                old_state=upd.old_chat_member,
-                new_state=upd.new_chat_member,
-            )
-            logger.debug("Received chat member update")
         await handler(event, data)
         logger = logger.bind(
             process_result=True,
@@ -105,8 +86,4 @@ class StructLoggingMiddleware(BaseMiddleware):
             logger.info("Handled callback query")
         elif event.inline_query:
             logger.info("Handled inline query")
-        elif event.my_chat_member:
-            logger.info("Handled my chat member update")
-        elif event.chat_member:
-            logger.info("Handled chat member update")
         return

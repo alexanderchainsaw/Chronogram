@@ -39,6 +39,8 @@ async def deliver_timecapsules():
                                        tc_id=tc.id, photo=tc.image, content=tc.text_content,
                                        l10n=await get_l10n_by_lang(lang=user_lang))
                 await TC.mark_as_received(tg_uid=tg_uid, tc_id=tc.id)
+                config.LOGGER.info(f"Sent timecapsule to ...{str(tg_uid)[5:]}, "
+                                   f"abs time = {tc.receive_timestamp - tc.send_timestamp}")
         await asyncio.sleep(5)
 
 

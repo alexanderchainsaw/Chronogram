@@ -20,6 +20,7 @@ async def deadline_notificator():
                                                   InlineKeyboardButton(text=LOC[user.language]['buttons']['got_it'],
                                                                        callback_data='default_close_menu')]]))
                 await db_req.mark_as_notified(user.tg_uid)
+                config.LOGGER.info(f"Notified of deadline: ...{str(user.tg_uid)[5:]}")
         await asyncio.sleep(30)
 
 
@@ -29,4 +30,5 @@ async def subscription_revoker():
         if data:
             for user in data:
                 await db_req.revoke_subscription(user.tg_uid)
+                config.LOGGER.info(f"Revoked subscription: ...{str(user.tg_uid)[5:]}")
         await asyncio.sleep(30)
