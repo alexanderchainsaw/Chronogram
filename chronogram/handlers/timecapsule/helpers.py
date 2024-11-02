@@ -10,8 +10,6 @@ from aiogram.types import Message
 from chronogram.middlewares import L10N
 
 
-# TODO! parsing might break if we change language in the process
-
 async def parse_content_from_message(callback: CallbackQuery) -> str:
     raw_text = callback.message.text
     if callback.message.photo:
@@ -26,8 +24,7 @@ async def parse_date_from_message(callback: CallbackQuery, l10n: L10N) -> str:
     if callback.message.photo:
         raw_text = callback.message.caption
     contains_date = raw_text.rsplit('\n\n', 1)[-1]
-    # TODO! we can make lang-insensitive search (there should be a : before the date no matter the lang)
-    return parse.search(l10n.data['/timecapsule']['you_selected'] + "{:<10}", contains_date.split('\n')[0])[0]
+    return contains_date.split('\n')[0].rsplit(None, 1)[-1]
 
 
 async def parse_datetime_from_message(callback: CallbackQuery) -> list[str, str]:
@@ -50,7 +47,7 @@ async def _validate_timecapsule(message: Message) -> tuple:
     elif message.text:
         total_size += len(message.text.encode('utf-8'))
     if message.photo:
-        ph = PhotoReader(photo=message.photo, file_name=f"None")
+        ph = PhotoReader(photo=message.photo, file_name="None")
         photo_blob = await ph.get_blob_image()
         total_size += sys.getsizeof(photo_blob)
     available_storage = await db_req.get_user_attr(tg_uid=message.from_user.id, col=ChronogramUser.space_available)
