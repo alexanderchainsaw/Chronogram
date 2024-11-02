@@ -33,7 +33,7 @@ class StructLoggingMiddleware(BaseMiddleware):
             if message.from_user is not None:
                 logger = logger.bind(user_id=f"...{str(message.from_user.id)[5:]}")
             if message.text:
-                logger = logger.bind(text=message.text, entities=message.entities)
+                logger = logger.bind(text=message.text[:5] + '...', entities=message.entities)
             if message.video:
                 logger = logger.bind(
                     caption=message.caption[:5] + '...',
