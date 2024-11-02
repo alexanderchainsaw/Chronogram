@@ -43,7 +43,7 @@ async def confirm_delete_everything(message: Message, state: FSMContext, l10n: L
         data = await state.get_data()
         await config.BOT.delete_message(chat_id=message.from_user.id, message_id=data['prompt_message_id'])
     except (aiogram.exceptions.TelegramBadRequest, KeyError) as e:
-        pass
+        config.LOGGER.warning(f"Error on delete_everything (delete prompt message), error: {e}")
     await state.clear()
     await message.delete()
 

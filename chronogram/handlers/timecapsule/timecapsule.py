@@ -77,7 +77,7 @@ async def timecapsule_prompt_date(message: Message, state: FSMContext, l10n: L10
     if timecapsule_text:
         await state.update_data(tc_size=len(timecapsule_text.encode('utf-8')))
     if message.photo:
-        ph = PhotoReader(photo=message.photo, file_name=f"None")
+        ph = PhotoReader(photo=message.photo, file_name="None")
         photo_blob = await ph.get_blob_image()
         tc_size = sys.getsizeof(photo_blob)
         if timecapsule_text:
@@ -154,7 +154,7 @@ async def process_date_selection(callback: CallbackQuery, callback_data: SimpleC
 async def process_time(callback: CallbackQuery, callback_data: TimepickerCallback, l10n: L10N):
     selected, _time, canceled = await process_selection(callback, callback_data, l10n=l10n)
     if selected:
-        selected_date = datetime.strptime(await parse_date_from_message(callback, l10n=l10n), '%d.%m.%Y')
+        selected_date = datetime.strptime(await parse_date_from_message(callback), '%d.%m.%Y')
         selected_datetime = datetime(selected_date.year, selected_date.month, selected_date.day,
                                      hour=int(_time.hour), minute=int(_time.minute))
         if selected_datetime < datetime.utcnow() + timedelta(
@@ -191,7 +191,7 @@ async def timecapsule_canceled(callback: CallbackQuery, l10n: L10N):
 
 async def confirm_send(callback: CallbackQuery, _time, l10n: L10N):
     content = await parse_content_from_message(callback)
-    date = await parse_date_from_message(callback, l10n=l10n)
+    date = await parse_date_from_message(callback)
     msg = f"<blockquote>{content}</blockquote>\n\n"
     msg += l10n.data['/timecapsule']['confirm_no_text'].format(f"{date} {_time.strftime('%H:%M')}")
     if callback.message.photo:
@@ -203,8 +203,7 @@ async def confirm_send(callback: CallbackQuery, _time, l10n: L10N):
                                                         callback_data='send_cancel'),
                                                         InlineKeyboardButton(
                                                             text=l10n.data['buttons']['send'],
-                                                            callback_data='send_confirm')
-                                                    ]
+                                                            callback_data='send_confirm')]
                                                 ]))
 
         return
@@ -216,8 +215,7 @@ async def confirm_send(callback: CallbackQuery, _time, l10n: L10N):
                                                  callback_data='send_cancel'),
                                                  InlineKeyboardButton(
                                                      text=l10n.data['buttons']['send'],
-                                                     callback_data='send_confirm')
-                                             ]
+                                                     callback_data='send_confirm')]
                                          ]))
 
 

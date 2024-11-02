@@ -1,5 +1,3 @@
-from aiogram import Bot
-from dotenv import load_dotenv
 from aiogram.types.input_file import FSInputFile
 from aiogram.types.photo_size import PhotoSize
 import os

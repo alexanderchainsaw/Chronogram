@@ -133,8 +133,8 @@ class TimeCapsuleDatabaseActions:
                                                                       col=ChronogramUser.utc_offset_minutes)),
                                          text_content=fernet.encrypt(data.text_content.encode('utf-8')) if data
                                          .text_content else None,
-                                         size=data.size, image=fernet.encrypt(data.image) if data.image else None
-                                         , image_data=data.image_data)
+                                         size=data.size, image=fernet.encrypt(data.image) if data.image else None,
+                                         image_data=data.image_data)
             await session.execute(insert(TimeCapsule).values(user_id=inner.user_id,
                                                              send_timestamp=inner.send_timestamp,
                                                              receive_timestamp=inner.receive_timestamp,

@@ -25,7 +25,7 @@ async def perform_state_clear(state: FSMContext, uid: int):
                 else:
                     config.LOGGER.warning(f'Unknown error on message delete: {err.message}')
     except KeyError:
-        config.LOGGER.debug(f'expected KeyError, No messages to delete')
+        config.LOGGER.debug('expected KeyError, No messages to delete')
     await state.clear()
 
 

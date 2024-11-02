@@ -15,10 +15,10 @@ class StructLoggingMiddleware(BaseMiddleware):
         super().__init__()
 
     async def __call__(
-        self,
-        handler: Callable[[Update, dict[str, Any]], Awaitable[Any]],
-        event: TelegramObject,
-        data: dict[str, Any],
+            self,
+            handler: Callable[[Update, dict[str, Any]], Awaitable[Any]],
+            event: TelegramObject,
+            data: dict[str, Any],
     ) -> Any:
         event = cast(Update, event)
         _started_processing_at = time.time()
@@ -110,4 +110,3 @@ class StructLoggingMiddleware(BaseMiddleware):
         elif event.chat_member:
             logger.info("Handled chat member update")
         return
-
