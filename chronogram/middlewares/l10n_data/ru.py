@@ -60,10 +60,6 @@ RU: dict[str, str] = {
                    'Все платежи в этом боте осуществляются с помощью Telegram Stars⭐️\n\n'
                    '<b>Все платежи этому боту не подлежат возврату.</b>\n\n'
                    '<i>Если у вас возникли вопросы касаемо оплат - @chronogram_support</i>',
-    # 'Subscription payments are <b>non-refundable</b>\n'
-    # 'Only <b>donations*</b> made less than 24 hours ago can be refunded\n'
-    # 'To refund, use /refund\n\n'
-    # '<i>*Payments made with /donate command</i>',
     "/donate": {"usage": "<b>Использование:</b>\n\n"
                          "<code>/donate *количество*</code>\n\n"
                          "<b>Все платежи этому боту не подлежат возврату.</b>",
@@ -109,9 +105,7 @@ RU: dict[str, str] = {
                      "you_selected": "Вы выбрали ",
                      "input_time": "Вы выбрали <b>{}</b>\n<b>Теперь выберите время</b>",
                      "time_error": "Неправильное время, попробуйте еще раз",
-                     # "confirm": "Ваша капсула времени:\n\n<blockquote>{}</blockquote>\n\nбудет доставлена:\n<b>{}</b>",
                      "confirm_no_text": "Ваша капсула времени будет доставлена:\n<b>{}</b>",
-                     # "canceled": "Создание капсулы времени отменено, сообщение: <blockquote>{}</blockquote>",
                      "canceled_no_text": "Создание капсулы времени отменено",
                      "sent": "Отправлено, места в хранилище: {}",
                      "received": "Получено сообщение от Вас\nОтправлено: <b>{}</b>\n\n"

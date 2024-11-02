@@ -6,8 +6,7 @@ from aiogram.types import CallbackQuery
 from config import config
 from chronogram.middlewares import StructLoggingMiddleware, LocalizationMiddleware, L10N
 from chronogram.database import async_main as init_postgresql
-from chronogram.handlers import (timecapsule_router, settings_router, payments_router, inbox_router, admin_router,
-                                 common_router, delete_router, general_router)
+from chronogram.handlers import routers
 from chronogram.background_workers.timecapsule_sender import KeepOrDeleteCallback, process_selection
 from chronogram.background_workers import subscription_revoker, deliver_timecapsules, deadline_notificator
 
@@ -15,9 +14,7 @@ from chronogram.background_workers import subscription_revoker, deliver_timecaps
 async def main():
     await init_postgresql()
     dp = Dispatcher(storage=MemoryStorage())
-
-    dp.include_routers(general_router, settings_router, payments_router, inbox_router, admin_router, delete_router,
-                       timecapsule_router, common_router)
+    dp.include_routers(*routers)
     dp.update.outer_middleware(StructLoggingMiddleware(logger=config.LOGGER))
     dp.message.outer_middleware(LocalizationMiddleware())
     dp.callback_query.outer_middleware(LocalizationMiddleware())

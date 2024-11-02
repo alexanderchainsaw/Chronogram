@@ -37,8 +37,8 @@ async def user_space_remaining_percent(tg_uid) -> str:
 
 async def _format_user_space_remaining_percent(space_taken: int, subscribed: bool) -> str:
     if subscribed:
-        return f"{int(100 - (space_taken / PREMIUM_USER_SPACE * 100))}%"
-    return f"{int(100 - (space_taken / DEFAULT_USER_SPACE * 100))}%"
+        return f"~{int(100 - (space_taken / PREMIUM_USER_SPACE * 100))}%"
+    return f"~{int(100 - (space_taken / DEFAULT_USER_SPACE * 100))}%"
 
 
 async def user_space_remaining_mb(tg_uid) -> str:

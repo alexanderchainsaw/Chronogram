@@ -13,6 +13,9 @@ from chronogram.settings_menu_models import SettingsCallback, SettingsMenuAction
 from chronogram.middlewares import L10N
 
 
+SUBSCRIPTION_COST = 150
+
+
 @dataclasses.dataclass
 class InvoicePayloadData:
     user_id: int
@@ -76,10 +79,9 @@ async def choose_duration_menu(data: SubscriptionMenuCallback, l10n: L10N) -> In
 
 
 async def send_payment_invoice(callback: CallbackQuery, months: int, l10n: L10N):
-    user_lang = await db_req.get_user_attr(tg_uid=callback.from_user.id, col=ChronogramUser.language)
     utc_diff = await db_req.get_user_attr(tg_uid=callback.from_user.id, col=ChronogramUser.utc_offset_minutes)
     builder = InlineKeyboardBuilder()
-    amount_xtr = 150 * months
+    amount_xtr = SUBSCRIPTION_COST * months
     builder.button(text=l10n.data['buttons']['pay'].format(amount_xtr), pay=True)
     builder.button(text=l10n.data['buttons']['close'],
                    callback_data=SubscriptionMenuCallback(user_id=callback.from_user.id,

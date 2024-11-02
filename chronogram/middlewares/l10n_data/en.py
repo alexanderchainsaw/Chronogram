@@ -60,10 +60,6 @@ EN: dict[str, str] = {
                    'All payments in this bot are done using Telegram Stars⭐️\n\n'
                    '<b>All payments to this bot are non-refundable</b>\n\n'
                    '<i>If you have any questions regarding payments - @chronogram_support</i>',
-    # 'Subscription payments are <b>non-refundable</b>\n'
-    # 'Only <b>donations*</b> made less than 24 hours ago can be refunded\n'
-    # 'To refund, use /refund\n\n'
-    # '<i>*Payments made with /donate command</i>',
     "/donate": {"usage": "<b>Usage:</b>\n\n"
                          "<code>/donate *amount*</code>\n\n"
                          "<b>All payments to this bot are non-refundable</b>",
@@ -87,7 +83,8 @@ EN: dict[str, str] = {
                              "<b>Important!</b>\nYou will lose access to the contents of "
                              "your time capsule once it's sent, "
                              "and only gain access to it after you've received it\n\n"
-                             '<i><b>*</b>Make sure to send your image as Photo, not as File (Checked "Compress the image")</i>'
+                             '<i><b>*</b>Make sure to send your image as Photo, '
+                             'not as File (Checked "Compress the image")</i>'
                              '\n\n<b>In your next message, enter content for your time capsule »</b>',
                      "invalid_data": 'Invalid data. Only text and/or image are supported\n\n'
                                      'If you submit an image, make sure to check '
@@ -107,9 +104,7 @@ EN: dict[str, str] = {
                      "you_selected": "You selected ",
                      "input_time": "You selected <b>{}</b>\n<b>Now select time of delivery</b>",
                      "time_error": "Invalid time, try again",
-                     # "confirm": "Your time capsule:\n\n<blockquote>{}</blockquote>\n\nwill be delivered on:\n<b>{}</b>",
                      "confirm_no_text": "Your time capsule will be delivered on:\n<b>{}</b>",
-                     # "canceled": "Time capsule canceled, text: <blockquote>{}</blockquote>",
                      "canceled_no_text": "Time capsule canceled",
                      "sent": "Time capsule sent, {} storage left",
                      "received": "You have a message from You\nSent at: <b>{}</b>\n\n"
