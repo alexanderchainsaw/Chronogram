@@ -32,7 +32,7 @@ class Config:
             if not val:
                 raise RuntimeError(f"Value {key} is empty")
         if self.PROD_API_TOKEN == self.TEST_API_TOKEN:
-            raise RuntimeError(f"Same token for TEST and for PROD")
+            raise RuntimeError("Same token for TEST and for PROD")
 
 
 config = Config()

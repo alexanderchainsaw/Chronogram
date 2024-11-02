@@ -69,11 +69,9 @@ async def process_successful_payment(message: Message, l10n: L10N):
     if await db_req.get_user_attr(col=ChronogramUser.subscription, tg_uid=message.from_user.id):
         cur_deadline = await db_req.get_user_attr(col=ChronogramUser.subscription_deadline,
                                                   tg_uid=message.from_user.id)
-        active_until = (cur_deadline + relativedelta(months=invoice_data.months,
-                                                     minutes=await db_req.get_user_attr(
-                                                        tg_uid=message.from_user.id,
-                                                        col=ChronogramUser.utc_offset_minutes))
-                        ).replace(microsecond=0).replace(second=0)
+        active_until = (cur_deadline + relativedelta(months=invoice_data.months, minutes=await db_req.get_user_attr(
+            tg_uid=message.from_user.id, col=ChronogramUser.utc_offset_minutes))
+                        ).replace(microsecond=0).replace(second=0) # noqa E126
     r = await db_req.process_payment(pay_data=pay_data, months=invoice_data.months)
     keyboard = InlineKeyboardMarkup(inline_keyboard=[[await get_default_close_button(l10n.lang)]])
     match r:
@@ -82,12 +80,10 @@ async def process_successful_payment(message: Message, l10n: L10N):
                                  reply_markup=keyboard)
         case 'PROLONG':
             await message.answer(text=l10n.data['/subscription']['subscription_prolonged'].format(
-                datetime.strftime(active_until, '%H:%M %d.%m.%Y')),
-                                 reply_markup=keyboard)
+                datetime.strftime(active_until, '%H:%M %d.%m.%Y')), reply_markup=keyboard)
         case 'GRANT':
             await message.answer(text=l10n.data['/subscription']['subscription_activated'].format(
-                datetime.strftime(active_until, '%H:%M %d.%m.%Y')),
-                                 reply_markup=keyboard)
+                datetime.strftime(active_until, '%H:%M %d.%m.%Y')), reply_markup=keyboard)
 
 
 @payments_router.message(Command('refund'))

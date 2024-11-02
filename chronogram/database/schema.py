@@ -25,7 +25,7 @@ class ChronogramUser(Base):
     __tablename__ = 'users'
 
     id: Mapped[INTEGER] = mapped_column(INTEGER, primary_key=True)
-    tg_uid: Mapped[BIGINT] = mapped_column(BIGINT) 
+    tg_uid: Mapped[BIGINT] = mapped_column(BIGINT)
     joined: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP, default=datetime.datetime.utcnow().replace(microsecond=0))
     utc_offset_minutes: Mapped[INTEGER] = mapped_column(INTEGER)
     language: Mapped[CHAR] = mapped_column(CHAR(length=2))

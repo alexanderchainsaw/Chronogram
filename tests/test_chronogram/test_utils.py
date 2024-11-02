@@ -44,6 +44,3 @@ async def test_format_mb():
     assert await target_func(subscribed=False, space_taken=100000) == '0.000<b>|</b>0.1MB'
 
     assert await target_func(subscribed=False, space_taken=0) == '0.1<b>|</b>0.1MB'
-
-
-

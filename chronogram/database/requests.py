@@ -21,7 +21,7 @@ async def get_uid_by_tg_uid(tg_uid: int) -> int:
         return await session.scalar(select(ChronogramUser.id).where(ChronogramUser.tg_uid == tg_uid))
 
 
-async def get_user_attr(col: ChronogramUser, user_id: int = None,  tg_uid: int = None):
+async def get_user_attr(col: ChronogramUser, user_id: int = None, tg_uid: int = None):
     if not user_id and not tg_uid:
         raise RuntimeError("Neither provided")
     elif not user_id:
@@ -111,8 +111,9 @@ class TimeCapsuleDatabaseActions:
     @staticmethod
     async def get_timecapsule_image(tg_uid: int, tc_id: int) -> TimeCapsule.image:
         async with async_session() as session:
-            return await session.scalar(select(TimeCapsule.image).where(TimeCapsule.id == tc_id)
-                                       .where(TimeCapsule.user_id == await get_uid_by_tg_uid(tg_uid)))
+            return await session.scalar(
+                select(TimeCapsule.image).where(TimeCapsule.id == tc_id).where(
+                    TimeCapsule.user_id == await get_uid_by_tg_uid(tg_uid)))
 
     @staticmethod
     async def get_timecapsule_image_data(tg_uid: int, tc_id: int) -> TimeCapsule.image:
@@ -271,11 +272,10 @@ async def invoice_exists(invoice_id: str):
 
 async def process_refund(tg_uid: int, telegram_payment_charge_id: str):
     async with async_session() as session:
-        pay_data: list[ChronogramPayment] = (await session.execute(select(ChronogramPayment)
-                                                             .where(ChronogramPayment
-                                                                    .tg_transaction_id == telegram_payment_charge_id)
-                                                             .where(ChronogramPayment
-                                                                    .user_id == await get_uid_by_tg_uid(tg_uid)))).all()
+        pay_data: list[ChronogramPayment] = (await session.execute(
+            select(ChronogramPayment).where(
+                ChronogramPayment.tg_transaction_id == telegram_payment_charge_id).where(
+                ChronogramPayment.user_id == await get_uid_by_tg_uid(tg_uid)))).all()
 
         if not pay_data:
             return 'INVALID_PAY_ID'
@@ -351,7 +351,6 @@ async def get_stats():
                                             .where(ChronogramPayment.type == 'subscription'))
         subs_now = await session.execute(select(ChronogramUser.id).where(ChronogramUser.subscription == True))
         return len(total_users.all()), len(subs_bought.all()), len(subs_now.all())
-
 
 
 country_to_timezone = {

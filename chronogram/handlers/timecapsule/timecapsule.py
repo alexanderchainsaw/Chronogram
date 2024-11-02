@@ -90,9 +90,8 @@ async def timecapsule_prompt_date(message: Message, state: FSMContext, l10n: L10
     calendar.set_dates_range(datetime(user_time.year, user_time.month, user_time.day),
                              datetime(user_time.year + 1000, user_time.month, user_time.day))
 
-    message_response = ("<blockquote>{}</blockquote>\n\n"
-                        .format(html.escape(timecapsule_text) if timecapsule_text else '') +
-                        f"{l10n.data['/timecapsule']['prompt_date']}")
+    message_response = ("<blockquote>{}</blockquote>\n\n".format(
+        html.escape(timecapsule_text) if timecapsule_text else '') + f"{l10n.data['/timecapsule']['prompt_date']}")
     if message.photo:
         ph = PhotoReader(photo=message.photo, file_name=f"temp\\create_{message.from_user.id}.jpg")
         input_file = await ph.load_image_from_tg()
@@ -136,8 +135,8 @@ async def process_date_selection(callback: CallbackQuery, callback_data: SimpleC
         timepicker_callback = TimepickerCallback(user_id=callback.from_user.id, hour=user_time.hour,
                                                  minute=user_time.minute)
         message_response = (
-                f"<blockquote>{content if content else ''}</blockquote>\n\n" +
-                f"{l10n.data['/timecapsule']['input_time'].format(date.strftime('%d.%m.%Y'))}")
+                f"<blockquote>{content if content else ''}"
+                f"</blockquote>\n\n" + f"{l10n.data['/timecapsule']['input_time'].format(date.strftime('%d.%m.%Y'))}")
         if callback.message.photo:
             await callback.message.edit_caption(caption=message_response,
                                                 reply_markup=await start_timepicker(data=timepicker_callback,

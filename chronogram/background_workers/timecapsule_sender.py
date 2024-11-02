@@ -96,8 +96,7 @@ async def send_timecapsule(tg_uid, sent, content, tc_id, photo, l10n: L10N):
                                               callback_data=KeepOrDeleteCallback(
                                                 action=KeepOrDeleteActions.delete_message,
                                                 tg_uid=tg_uid,
-                                                tc_id=tc_id).pack())]]
-                               ))
+                                                tc_id=tc_id).pack())]]))
 
 
 async def process_selection(callback: CallbackQuery, data: KeepOrDeleteCallback, l10n: L10N):
@@ -135,8 +134,7 @@ async def process_selection(callback: CallbackQuery, data: KeepOrDeleteCallback,
                 reply_markup=markup)
 
         case KeepOrDeleteActions.cancel_delete:
-            markup = InlineKeyboardMarkup(inline_keyboard=
-            [[InlineKeyboardButton(
+            markup = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
                 text=l10n.data['buttons']['keep'],
                 callback_data=KeepOrDeleteCallback(
                     action=KeepOrDeleteActions.keep_message,

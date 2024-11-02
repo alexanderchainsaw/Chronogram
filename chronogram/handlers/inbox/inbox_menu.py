@@ -112,7 +112,8 @@ async def start_inbox_menu(data: InboxCallback, l10n: L10N) -> InlineKeyboardMar
 
     for msg in packed_timecapsules[data.cur_page]:
         builder.button(text=await get_message_timestamps_fmt(msg, data.user_id),
-                       callback_data=await data.replace_and_pack(action=InboxCallbackActions.get_timecapsule + str(msg)))
+                       callback_data=await data.replace_and_pack(
+                           action=InboxCallbackActions.get_timecapsule + str(msg)))
     builder.add(InlineKeyboardButton(text='«',
                                      callback_data=await data.replace_and_pack(InboxCallbackActions.prev_page)),
                 InlineKeyboardButton(text=l10n.data['buttons']['close'],
@@ -165,8 +166,8 @@ async def process_selection(callback: CallbackQuery, data: InboxCallback, l10n: 
                                                                 text=l10n.data['buttons']['cancel'],
                                                                 callback_data=await data.replace_and_pack(
                                                                     InboxCallbackActions.get_timecapsule +
-                                                                    str(data.cur_timecapsule))
-                                                                )]]))
+                                                                    str(data.cur_timecapsule)))]])
+                                                    )
             case InboxCallbackActions.confirm_delete:
                 await handle_delete_from_inbox(data, callback, l10n=l10n)
     except IndexError:
