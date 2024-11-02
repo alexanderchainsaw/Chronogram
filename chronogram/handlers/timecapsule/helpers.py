@@ -1,5 +1,4 @@
 import sys
-import parse
 import html
 from aiogram.types import CallbackQuery
 import chronogram.database.requests as db_req
@@ -14,15 +13,23 @@ async def parse_content_from_message(callback: CallbackQuery) -> str:
     raw_text = callback.message.text
     if callback.message.photo:
         raw_text = callback.message.caption
+    return await _parse_content_from_message(raw_text)
+
+
+async def _parse_content_from_message(raw_text: str) -> str:
     if '\n\n' not in raw_text:
         return ''
     return html.escape(raw_text.rsplit('\n\n', 1)[0])
 
 
-async def parse_date_from_message(callback: CallbackQuery, l10n: L10N) -> str:
+async def parse_date_from_message(callback: CallbackQuery) -> str:
     raw_text = callback.message.text
     if callback.message.photo:
         raw_text = callback.message.caption
+    return await _parse_date_from_message(raw_text)
+
+
+async def _parse_date_from_message(raw_text: str) -> str:
     contains_date = raw_text.rsplit('\n\n', 1)[-1]
     return contains_date.split('\n')[0].rsplit(None, 1)[-1]
 
@@ -31,8 +38,15 @@ async def parse_datetime_from_message(callback: CallbackQuery) -> list[str, str]
     raw_text = callback.message.text
     if callback.message.photo:
         raw_text = callback.message.caption
+    return await _parse_datetime_from_message(raw_text)
+
+
+async def _parse_datetime_from_message(raw_text: str) -> list[str, str]:
     contains_date = raw_text.rsplit('\n', 1)[-1]
-    return contains_date.split()
+    date_time = contains_date.split()
+    if len(date_time) != 2:
+        raise RuntimeError(f'Parse datetime error, object: {date_time}')
+    return date_time
 
 
 async def _validate_timecapsule(message: Message) -> tuple:
