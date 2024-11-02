@@ -35,7 +35,7 @@ jobs:
         echo "${{secrets.ENV_VARIABLES}}" >> .env
     - name: Lint with flake8
       run: |
-        flake8
+        poetry run flake8
     - name: Test with pytest
       run: |
         poetry run pytest
