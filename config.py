@@ -29,7 +29,7 @@ class Config:
 
     def __post_init__(self):
         for key, val in self.__dict__.items():
-            if not val:
+            if val is None:
                 raise RuntimeError(f"Value {key} is empty")
         if self.PROD_API_TOKEN == self.TEST_API_TOKEN:
             raise RuntimeError("Same token for TEST and for PROD")
