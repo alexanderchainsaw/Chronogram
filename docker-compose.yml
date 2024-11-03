@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    container_name: db
+    environment:
+      - POSTGRES_USER=${PG_LOGIN}
+      - POSTGRES_PASSWORD=${PG_PASS}
+      - POSTGRES_DB=${PG_DB_NAME}
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db:/var/lib/postgresql/data
+  api:
+    platform: linux/amd64
+    environment:
+      - TESTING=${TESTING}
+      - PROD_API_TOKEN=${PROD_API_TOKEN}
+      - TEST_API_TOKEN=${TEST_API_TOKEN}
+      - FERNET_KEY=${FERNET_KEY}
+      - ADMIN_IDS=${ADMIN_IDS}
+      - PG_LOGIN=${PG_LOGIN}
+      - PG_PASS=${PG_PASS}
+      - PG_DB_NAME=${PG_DB_NAME}
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT}
+    depends_on:
+      - db
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
