@@ -7,6 +7,7 @@ from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
 from aiogram import Bot
 from cryptography.fernet import Fernet
+from redis import Redis
 
 load_dotenv()
 
@@ -23,6 +24,9 @@ class Config:
     PG_DB_NAME: str = os.getenv('PG_DB_NAME')
     PG_HOST: str = os.getenv('PG_HOST')
     PG_PORT: str = os.getenv('PG_PORT')
+    REDIS: Redis = Redis(host=os.getenv('REDIS_HOST'), port=int(os.getenv('REDIS_PORT')), db=0,
+                         username=os.getenv('REDIS_USER'), password=os.getenv('REDIS_USER_PASSWORD'),
+                         decode_responses=True)
     LOGGER: FilteringBoundLogger = get_logger()
     BOT = Bot(token=TEST_API_TOKEN if TESTING else PROD_API_TOKEN,
               default=DefaultBotProperties(parse_mode=ParseMode.HTML))

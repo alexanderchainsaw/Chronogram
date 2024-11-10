@@ -3,6 +3,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from datetime import datetime, timedelta
 import chronogram.database.requests as db_req
+import config
 from chronogram.database.schema import ChronogramUser
 from chronogram.settings_menu_models import SettingsCallback, SettingsMenuActions
 from chronogram.utils import user_space_remaining_mb, user_space_remaining_percent
@@ -86,6 +87,7 @@ async def process_selection(callback: CallbackQuery, data: SettingsCallback, l10
             await callback.answer(text=l10n.data["/settings"]['language_change_success'])
             await callback.message.edit_text(await get_init_settings_msg(callback.from_user.id, l10n=l10n))
             await callback.message.edit_reply_markup(reply_markup=await _select_language_menu(l10n=l10n))
+            config.config.REDIS.set(str(callback.from_user.id), new_lang)
     elif data.action.startswith(SettingsMenuActions.SELECT_UTC):
         _, sign, hour, minute = data.action.split('|')
         user_utf_diff_minutes = int(hour) * 60 + int(minute)
