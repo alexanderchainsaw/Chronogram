@@ -32,7 +32,7 @@
 ## <p align="center"> /settings</p>
 #### <p align="center">Opens an interactive inline menu, showing user's settings and statistics (timezone, language, subscription status, space available)</p>
 #### <p align="center"> ![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/settings_1.png?raw=true)</p>
-#### <p align="center">Prolong Subscription:</p>
+#### <p align="center">Buy/Prolong Subscription:</p>
 #### <p align="center"> ![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/settings_2.png?raw=true)</p>
 #### <p align="center">Switch language</p>
 #### <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/settings_3.png?raw=true)</p>
