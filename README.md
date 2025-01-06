@@ -1,5 +1,5 @@
-# <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/media/inbox_pic.jpg?raw=true)</p>
-### Chronogram - A personal time capsule bot written in aiogram3
+# <p align="center">Chronogram</p>
+### A personal time capsule bot written in aiogram3
 
 #### <b>The bot is available at [@chronogram_bot](https://t.me/chronogram_bot) in telegram </b>
 
