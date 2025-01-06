@@ -14,6 +14,7 @@ async def common_close_menu(callback: CallbackQuery, l10n: L10N):
         await callback.message.delete()
     except aiogram.exceptions.TelegramBadRequest:
         await callback.answer(l10n.data['cant_delete_msg'])
+        await callback.message.delete_reply_markup()
 
 
 @common_router.message()
