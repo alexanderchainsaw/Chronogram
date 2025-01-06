@@ -1,6 +1,8 @@
 import asyncio
 import datetime
 import os
+
+import aiogram.exceptions
 from PIL import Image
 from enum import Enum
 from chronogram.utils import user_space_remaining_percent
@@ -107,7 +109,14 @@ async def process_selection(callback: CallbackQuery, data: KeepOrDeleteCallback,
         case KeepOrDeleteActions.keep_message:
             await callback.answer(text=l10n.data["/timecapsule"]['saved']
                                   .format(await user_space_remaining_percent(data.tg_uid)))
-            await callback.message.delete()
+            try:
+                await callback.message.delete()
+            except aiogram.exceptions.TelegramBadRequest:
+                await callback.message.delete_reply_markup()
+                if photo:
+                    await callback.message.edit_caption(caption=l10n.data["/timecapsule"]['saved'])
+                else:
+                    await callback.message.edit_text(text=l10n.data["/timecapsule"]['saved'])
         case KeepOrDeleteActions.delete_message:
             markup = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
                 text=l10n.data['buttons']['confirm_delete'],
@@ -160,4 +169,11 @@ async def process_selection(callback: CallbackQuery, data: KeepOrDeleteCallback,
             await TC.delete_timecapsule(tg_uid=data.tg_uid, tc_id=data.tc_id)
             await callback.answer(l10n.data["/timecapsule"]['deleted']
                                   .format(await user_space_remaining_percent(data.tg_uid)))
-            await callback.message.delete()
+            try:
+                await callback.message.delete()
+            except aiogram.exceptions.TelegramBadRequest:
+                await callback.message.delete_reply_markup()
+                if photo:
+                    await callback.message.edit_caption(caption=l10n.data["/timecapsule"]['deleted'])
+                else:
+                    await callback.message.edit_text(text=l10n.data["/timecapsule"]['deleted'])
