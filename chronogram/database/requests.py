@@ -43,7 +43,9 @@ async def add_user_if_not_exists(tg_uid: int, lang: str) -> bool:
             data = InnerChronogramUserData(language=lang, utc_offset_minutes=utc_offset, tg_uid=tg_uid)
             await session.execute(insert(ChronogramUser).values(language=data.language,
                                                                 utc_offset_minutes=data.utc_offset_minutes,
-                                                                tg_uid=tg_uid))
+                                                                tg_uid=tg_uid,
+                                                                joined=datetime.datetime.utcnow()
+                                                                .replace(microsecond=0)))
             await session.commit()
             return True
     return False
