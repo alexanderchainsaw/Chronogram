@@ -11,7 +11,7 @@ from chronogram.database.schema import DEFAULT_USER_SPACE, PREMIUM_USER_SPACE
 from chronogram.database.schema import ChronogramUser, TimeCapsule, ChronogramPayment
 from chronogram.database.schema import tc_image_data
 from sqlalchemy import select, insert, update, delete
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 
 fernet = config.FERNET
 
@@ -346,13 +346,17 @@ async def process_payment(pay_data: OuterChronogramPaymentData, months: int = No
     return response
 
 
-async def get_stats():
+async def get_stats() -> tuple[int, int, int]:
     async with async_session() as session:
-        total_users = await session.execute(select(ChronogramUser.id))
-        subs_bought = await session.execute(select(ChronogramPayment.id)
-                                            .where(ChronogramPayment.type == 'subscription'))
-        subs_now = await session.execute(select(ChronogramUser.id).where(ChronogramUser.subscription == True))
-        return len(total_users.all()), len(subs_bought.all()), len(subs_now.all())
+
+        total_users = (await session.execute(select(func.count(ChronogramUser.id)))).scalar_one()
+
+        subs_bought = (await session.execute(select(func.count(ChronogramPayment.id))
+                                            .where(ChronogramPayment.type == 'subscription'))).scalar_one()
+
+        subs_now = (await session.execute(func.count(select(ChronogramUser.id))
+                                         .where(ChronogramUser.subscription == True))).scalar_one()
+        return total_users, subs_bought, subs_now
 
 
 country_to_timezone = {
