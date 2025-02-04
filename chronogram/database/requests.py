@@ -351,11 +351,11 @@ async def get_stats() -> tuple[int, int, int]:
 
         total_users = (await session.execute(select(func.count(ChronogramUser.id)))).scalar_one()
 
-        subs_bought = (await session.execute(select(func.count(ChronogramPayment.id))
-                                            .where(ChronogramPayment.type == 'subscription'))).scalar_one()
+        subs_bought = (await session.execute(select(
+            func.count(ChronogramPayment.id)).where(ChronogramPayment.type == 'subscription'))).scalar_one()
 
-        subs_now = (await session.execute(func.count(select(ChronogramUser.id))
-                                         .where(ChronogramUser.subscription == True))).scalar_one()
+        subs_now = (await session.execute(
+            func.count(select(ChronogramUser.id)).where(ChronogramUser.subscription == True))).scalar_one()
         return total_users, subs_bought, subs_now
 
 
