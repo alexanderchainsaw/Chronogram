@@ -38,11 +38,11 @@ class LocalizationMiddleware(BaseMiddleware):
             if lang not in ('en', 'ru'):
                 lang = 'en'
             data['l10n'] = L10N(data=LOC[lang], lang=lang)
-            self.r.set(str(event.from_user.id), lang)
+            await self.r.set(str(event.from_user.id), lang)
             return await handler(event, data)
-        if not (lang := self.r.get(str(event.from_user.id))):
+        if not (lang := await self.r.get(str(event.from_user.id))):
             config.LOGGER.info('Not in redis storage, going to db')
             lang = await get_user_attr(user_id=uid, col=ChronogramUser.language)
-            self.r.set(str(event.from_user.id), lang)
+            await self.r.set(str(event.from_user.id), lang)
         data['l10n'] = L10N(data=LOC[lang], lang=lang)
         return await handler(event, data)

@@ -88,7 +88,7 @@ async def process_selection(callback: CallbackQuery, data: SettingsCallback, l10
             await callback.answer(text=l10n.data["/settings"]['language_change_success'])
             await callback.message.edit_text(await get_init_settings_msg(callback.from_user.id, l10n=l10n))
             await callback.message.edit_reply_markup(reply_markup=await _select_language_menu(l10n=l10n))
-            config.REDIS.set(str(callback.from_user.id), new_lang)
+            await config.AIOREDIS.set(str(callback.from_user.id), new_lang)
     elif data.action.startswith(SettingsMenuActions.SELECT_UTC):
         _, sign, hour, minute = data.action.split('|')
         user_utf_diff_minutes = int(hour) * 60 + int(minute)
