@@ -35,6 +35,7 @@ class Config:
     SUBSCRIPTION_COST: int = 150  # 150 telegram stars a month
     DEFAULT_USER_SPACE: int = 100_000  # 0.1 megabytes
     PREMIUM_USER_SPACE: int = 10_000_000  # 10 megabytes
+    PAGE_LENGTH: int = 4  # amount of items in each page in /inbox
 
     def __post_init__(self):
         for key, val in self.__dict__.items():
