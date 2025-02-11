@@ -32,9 +32,9 @@ class Config:
               default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
     # CONSTANTS
-    SUBSCRIPTION_COST = 150  # in telegram stars
-    DEFAULT_USER_SPACE = 100_000  # 0.1 megabytes
-    PREMIUM_USER_SPACE = 10_000_000  # 10 megabytes
+    SUBSCRIPTION_COST: int = 150  # 150 telegram stars a month
+    DEFAULT_USER_SPACE: int = 100_000  # 0.1 megabytes
+    PREMIUM_USER_SPACE: int = 10_000_000  # 10 megabytes
 
     def __post_init__(self):
         for key, val in self.__dict__.items():
