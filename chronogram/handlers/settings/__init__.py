@@ -1,1 +1,1 @@
-from chronogram.handlers.settings.settings import settings_router
+from .settings import settings_router

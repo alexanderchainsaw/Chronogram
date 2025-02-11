@@ -4,10 +4,11 @@ from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-import chronogram.database.requests as db_req
 from aiogram.utils.keyboard import InlineKeyboardMarkup, InlineKeyboardButton
-from chronogram.utils import get_default_close_button, perform_state_clear
-from chronogram.middlewares import L10N
+from ..database import requests as db_req
+from ..utils import get_default_close_button, perform_state_clear
+from ..middlewares import L10N
+
 from config import config
 
 delete_router = Router(name='delete_router')

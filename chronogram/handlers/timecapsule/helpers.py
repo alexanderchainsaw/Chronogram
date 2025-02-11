@@ -1,12 +1,12 @@
 import sys
 import html
-from aiogram.types import CallbackQuery
-import chronogram.database.requests as db_req
-from chronogram.database.schema import ChronogramUser
-from chronogram.database.requests import TimeCapsuleDatabaseActions as TC
-from chronogram.photo_utils import PhotoReader
 from aiogram.types import Message
-from chronogram.middlewares import L10N
+from aiogram.types import CallbackQuery
+from ...database import requests as db_req
+from ...database.schema import ChronogramUser
+from ...database.requests import TimeCapsuleDatabaseActions as TC
+from ...photo_utils import PhotoReader
+from ...middlewares import L10N
 
 
 async def parse_content_from_message(callback: CallbackQuery) -> str:

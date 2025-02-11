@@ -6,13 +6,12 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 from aiogram.types import LabeledPrice, PreCheckoutQuery
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardMarkup
-from chronogram.database.schema import ChronogramUser
-from chronogram.database.models import OuterChronogramPaymentData
-import chronogram.database.requests as db_req
-from chronogram.middlewares import L10N
-from chronogram.utils import get_default_close_button, perform_state_clear
-from chronogram.handlers.payments.schemas import (InvoicePayloadData,
-                                                  process_subscription_menu_actions, SubscriptionMenuCallback)
+from ...database.schema import ChronogramUser
+from ...database.models import OuterChronogramPaymentData
+from ...database import requests as db_req
+from ...middlewares import L10N
+from ...utils import get_default_close_button, perform_state_clear
+from .schemas import (InvoicePayloadData, process_subscription_menu_actions, SubscriptionMenuCallback)
 
 payments_router = Router(name='payments_router')
 

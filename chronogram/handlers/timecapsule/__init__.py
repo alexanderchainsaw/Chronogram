@@ -1,1 +1,1 @@
-from chronogram.handlers.timecapsule.timecapsule import timecapsule_router
+from .timecapsule import timecapsule_router

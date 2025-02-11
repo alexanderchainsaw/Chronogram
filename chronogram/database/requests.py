@@ -2,16 +2,16 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import sys
 from typing import Optional
-from config import config
-from chronogram.database.models import (InnerChronogramUserData, InnerChronogramPaymentData, InnerTimeCapsuleData,
-                                        OuterChronogramPaymentData, OuterTimeCapsuleData)
-
-from chronogram.database.schema import async_session
-from chronogram.database.schema import DEFAULT_USER_SPACE, PREMIUM_USER_SPACE
-from chronogram.database.schema import ChronogramUser, TimeCapsule, ChronogramPayment
-from chronogram.database.schema import tc_image_data
 from sqlalchemy import select, insert, update, delete
 from sqlalchemy import desc, func
+from .models import (InnerChronogramUserData, InnerChronogramPaymentData, InnerTimeCapsuleData,
+                     OuterChronogramPaymentData, OuterTimeCapsuleData)
+from .schema import async_session
+from .schema import ChronogramUser, TimeCapsule, ChronogramPayment
+from .schema import tc_image_data
+
+from config import config
+
 
 fernet = config.FERNET
 
@@ -174,9 +174,9 @@ class TimeCapsuleDatabaseActions:
             await session.execute(delete(TimeCapsule).where(TimeCapsule.user_id == uid))
             await session.execute(update(ChronogramUser).where(
                 ChronogramUser.id == await get_uid_by_tg_uid(tg_uid)).values(
-                space_available=DEFAULT_USER_SPACE if not await get_user_attr(user_id=uid,
-                                                                              col=ChronogramUser.subscription)
-                else PREMIUM_USER_SPACE,
+                space_available=config.DEFAULT_USER_SPACE if not await get_user_attr(user_id=uid,
+                                                                                     col=ChronogramUser.subscription)
+                else config.PREMIUM_USER_SPACE,
                 space_taken=0))
             await session.commit()
 
@@ -248,18 +248,18 @@ async def edit_language(tg_uid: int, new_lang: str):
 async def revoke_subscription(tg_uid: int):
     user_id = await get_uid_by_tg_uid(tg_uid)
     space_taken = await get_user_attr(user_id=user_id, col=ChronogramUser.space_taken)
-    if space_taken > DEFAULT_USER_SPACE:
+    if space_taken > config.DEFAULT_USER_SPACE:
         for tc in await TimeCapsuleDatabaseActions.get_timecapsules_for_deletion(tg_uid):
             await TimeCapsuleDatabaseActions.delete_timecapsule(tg_uid=tg_uid, tc_id=tc.id)
             space_taken -= tc.size
-            if space_taken <= DEFAULT_USER_SPACE:
+            if space_taken <= config.DEFAULT_USER_SPACE:
                 break
     async with async_session() as session:
         await session.execute(update(ChronogramUser).where(ChronogramUser.id == user_id)
                               .values(subscription_deadline=None,
                                       subscription=False,
                                       notified_deadline=False,
-                                      space_available=DEFAULT_USER_SPACE - space_taken,
+                                      space_available=config.DEFAULT_USER_SPACE - space_taken,
                                       space_taken=space_taken))
         await session.commit()
 
@@ -304,7 +304,7 @@ async def grant_subscription(user_id: int, months: int):
                                       subscription_deadline=(datetime
                                                              .datetime.utcnow() + relativedelta(months=months))
                                       .replace(microsecond=0),
-                                      space_available=PREMIUM_USER_SPACE - await get_user_attr(
+                                      space_available=config.PREMIUM_USER_SPACE - await get_user_attr(
                                           user_id=user_id, col=ChronogramUser.space_taken)))
         await session.commit()
 

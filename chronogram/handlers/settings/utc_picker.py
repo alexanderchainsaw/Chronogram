@@ -3,8 +3,8 @@ from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters.callback_data import CallbackData
 from enum import Enum
-from chronogram.middlewares import L10N
-from chronogram.settings_menu_models import SettingsCallback, SettingsMenuActions
+from ...middlewares import L10N
+from ...settings_menu_models import SettingsCallback, SettingsMenuActions
 
 UTC_MINUTE_VALUES = [0, 30, 45]
 UTC_HOUR_VALUES = [x for x in range(15)]

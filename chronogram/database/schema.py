@@ -3,6 +3,7 @@ from sqlalchemy.dialects.postgresql import (BYTEA, BIGINT, INTEGER, TIMESTAMP, B
                                             VARCHAR)
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
+
 from config import config
 
 engine = create_async_engine(f'postgresql+asyncpg://'
@@ -10,10 +11,6 @@ engine = create_async_engine(f'postgresql+asyncpg://'
                              f'{config.PG_HOST}:{config.PG_PORT}/{config.PG_DB_NAME}')
 
 async_session = async_sessionmaker(engine)
-
-
-DEFAULT_USER_SPACE = 100000
-PREMIUM_USER_SPACE = 10000000
 
 
 class Base(DeclarativeBase):

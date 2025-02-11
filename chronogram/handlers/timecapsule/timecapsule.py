@@ -3,24 +3,24 @@ from datetime import datetime, timedelta
 import sys
 import aiogram.exceptions
 from PIL import Image
-from chronogram.handlers.timecapsule.aiogram3_simplecalendar import SimpleCalendar, SimpleCalendarCallback
-from chronogram.handlers.timecapsule.timepicker_bigstep import process_selection, start_timepicker, TimepickerCallback
-from chronogram.utils import user_space_remaining_percent, perform_state_clear, get_default_close_button
-import chronogram.database.requests as db_req
-from chronogram.database.schema import ChronogramUser
-from chronogram.database.models import OuterTimeCapsuleData
-from chronogram.database.requests import TimeCapsuleDatabaseActions as TC
 from aiogram import Router, F
 from aiogram.filters import Command
-from chronogram.photo_utils import PhotoReader
-from chronogram.handlers.timecapsule.helpers import (_get_not_enough_space_message, _validate_timecapsule,
-                                                     parse_date_from_message, parse_content_from_message,
-                                                     parse_datetime_from_message)
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+from ...utils import user_space_remaining_percent, perform_state_clear, get_default_close_button
+from ...database import requests as db_req
+from ...database.schema import ChronogramUser
+from ...database.models import OuterTimeCapsuleData
+from ...database.requests import TimeCapsuleDatabaseActions as TC
+from ...photo_utils import PhotoReader
+from ...middlewares import L10N
+from .helpers import (_get_not_enough_space_message, _validate_timecapsule, parse_date_from_message,
+                      parse_content_from_message, parse_datetime_from_message)
+from .aiogram3_simplecalendar import SimpleCalendar, SimpleCalendarCallback
+from .timepicker_bigstep import process_selection, start_timepicker, TimepickerCallback
+
 from config import config
-from chronogram.middlewares import L10N
 
 timecapsule_router = Router(name='timecapsule_router')
 

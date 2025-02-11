@@ -8,20 +8,19 @@ from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.filters.callback_data import CallbackData
-import chronogram.database.requests as db_req
-from chronogram.database.schema import ChronogramUser, TimeCapsule
-from chronogram.database.requests import TimeCapsuleDatabaseActions as TC
-from chronogram.utils import user_space_remaining_percent, user_space_remaining_mb
 from aiogram.types.input_file import FSInputFile
 from enum import Enum
 from typing import Optional
+from ...database import requests as db_req
+from ...database.schema import ChronogramUser, TimeCapsule
+from ...database.requests import TimeCapsuleDatabaseActions as TC
+from ...utils import user_space_remaining_percent, user_space_remaining_mb
+from ...middlewares import L10N
+
 from config import config
-from chronogram.middlewares import L10N
 
 
 inbox_pic = FSInputFile('media/inbox_pic.jpg')
-
-PAGE_LEN = 4
 
 
 class InboxCallbackActions(str, Enum):
@@ -52,7 +51,7 @@ async def pack_timecapsule_ids(tc_ids: list[int]) -> list[list[int]]:
     i = 0
     cur = []
     while i < len(tc_ids):
-        if len(cur) == PAGE_LEN:
+        if len(cur) == config.PAGE_LENGTH:
             res.append(cur)
             cur = []
         cur.append(tc_ids[i])

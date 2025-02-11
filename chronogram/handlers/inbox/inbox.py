@@ -1,16 +1,16 @@
 from aiogram.types import CallbackQuery
-from chronogram.database.requests import TimeCapsuleDatabaseActions as TC
 from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
-import chronogram.database.requests as db_req
-from chronogram.database.schema import ChronogramUser
 from aiogram.utils.keyboard import InlineKeyboardMarkup
-from chronogram.utils import get_default_close_button, perform_state_clear
-from chronogram.handlers.inbox.inbox_menu import (InboxCallback, start_inbox_menu, process_selection, inbox_pic,
-                                                  start_inbox_caption)
-from chronogram.middlewares import L10N
+from ...database import requests as db_req
+from ...database.requests import TimeCapsuleDatabaseActions as TC
+from ...database.schema import ChronogramUser
+from ...utils import get_default_close_button, perform_state_clear
+from ...middlewares import L10N
+from .inbox_menu import (InboxCallback, start_inbox_menu, process_selection, inbox_pic,
+                         start_inbox_caption)
 
 
 inbox_router = Router(name='inbox_router')
@@ -36,5 +36,5 @@ async def command_inbox(message: Message, state: FSMContext, l10n: L10N):
 
 
 @inbox_router.callback_query(InboxCallback.filter())
-async def procces_inbox_callback(callback_query: CallbackQuery, callback_data: InboxCallback, l10n: L10N):
+async def process_inbox_callback(callback_query: CallbackQuery, callback_data: InboxCallback, l10n: L10N):
     await process_selection(callback_query, callback_data, l10n=l10n)

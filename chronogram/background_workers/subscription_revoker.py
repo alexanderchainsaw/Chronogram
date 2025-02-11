@@ -1,9 +1,9 @@
 import asyncio
-import chronogram.database.requests as db_req
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from chronogram.database.schema import DEFAULT_USER_SPACE
+from ..database import requests as db_req
+from ..middlewares.l10n_data import LOC
+
 from config import config
-from chronogram.middlewares.l10n_data import LOC
 
 
 async def deadline_notificator():
@@ -12,7 +12,7 @@ async def deadline_notificator():
         if data:
             for user in data:
                 message_text = LOC[user.language]['/subscription']['subscription_deadline']
-                if user.space_taken > DEFAULT_USER_SPACE:
+                if user.space_taken > config.DEFAULT_USER_SPACE:
                     message_text = LOC[user.language]['/subscription']['subscription_deadline_surplus']
                 message_text += LOC[user.language]['/subscription']['subscription_deadline_prolong']
                 await config.BOT.send_message(chat_id=user.tg_uid, text=message_text,

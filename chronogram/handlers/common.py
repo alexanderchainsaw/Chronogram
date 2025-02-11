@@ -2,8 +2,8 @@ import aiogram.exceptions
 from aiogram import Router, F
 from aiogram.types import CallbackQuery, Message
 from aiogram.utils.keyboard import InlineKeyboardMarkup
-from chronogram.middlewares import L10N
-from chronogram.utils import get_default_close_button
+from ..middlewares import L10N
+from ..utils import get_default_close_button
 
 common_router = Router(name='common_router')
 

@@ -3,11 +3,11 @@ from aiogram import Router
 from aiogram.types import Message
 from datetime import datetime, timedelta
 from aiogram.fsm.context import FSMContext
-import chronogram.database.requests as db_req
-from chronogram.database.schema import ChronogramUser
-from chronogram.middlewares import L10N
 from aiogram.utils.keyboard import InlineKeyboardMarkup
-from chronogram.utils import get_default_close_button, perform_state_clear
+from ..database.schema import ChronogramUser
+from ..middlewares import L10N
+from ..database import requests as db_req
+from ..utils import get_default_close_button, perform_state_clear
 
 
 general_router = Router(name='general_router')

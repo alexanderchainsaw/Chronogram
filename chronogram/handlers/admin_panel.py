@@ -1,11 +1,12 @@
 from aiogram.filters import Command
 from aiogram.filters import BaseFilter
-import chronogram.database.requests as db_req
 from aiogram import Router
 from aiogram.types import Message
 from aiogram.utils.keyboard import InlineKeyboardMarkup
-from chronogram.utils import get_default_close_button, perform_state_clear
 from aiogram.fsm.context import FSMContext
+from ..database import requests as db_req
+from ..utils import get_default_close_button, perform_state_clear
+
 from config import config
 
 admin_router = Router(name='admin_router')

@@ -3,11 +3,11 @@ from aiogram.types import Message, CallbackQuery, PreCheckoutQuery
 from collections.abc import Awaitable, Callable
 from typing import Any, Dict
 from aiogram import BaseMiddleware
-
-import config
-from chronogram.database.requests import get_uid_by_tg_uid, add_user_if_not_exists, get_user_attr, ChronogramUser
-from .l10n_data import LOC
 from redis import Redis
+from ..database.requests import get_uid_by_tg_uid, add_user_if_not_exists, get_user_attr, ChronogramUser
+from .l10n_data import LOC
+
+from config import config
 
 
 @dataclasses.dataclass
@@ -41,7 +41,7 @@ class LocalizationMiddleware(BaseMiddleware):
             self.r.set(str(event.from_user.id), lang)
             return await handler(event, data)
         if not (lang := self.r.get(str(event.from_user.id))):
-            config.config.LOGGER.info('Not in redis storage, going to db')
+            config.LOGGER.info('Not in redis storage, going to db')
             lang = await get_user_attr(user_id=uid, col=ChronogramUser.language)
             self.r.set(str(event.from_user.id), lang)
         data['l10n'] = L10N(data=LOC[lang], lang=lang)

@@ -3,7 +3,7 @@ from datetime import time
 from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters.callback_data import CallbackData
-from chronogram.middlewares import L10N
+from ...middlewares import L10N
 
 
 class TimepickerActions(str, Enum):

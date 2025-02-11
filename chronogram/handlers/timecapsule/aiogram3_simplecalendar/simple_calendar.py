@@ -4,11 +4,11 @@ from datetime import datetime, timedelta
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types import CallbackQuery
 
+from ....middlewares import L10N
+from ....database.requests import get_user_attr
+from ....database.schema import ChronogramUser
 from .schemas import SimpleCalendarCallback, SimpleCalAct
 from .common import GenericCalendar
-from chronogram.middlewares import L10N
-from chronogram.database.requests import get_user_attr
-from chronogram.database.schema import ChronogramUser
 
 
 class SimpleCalendar(GenericCalendar):

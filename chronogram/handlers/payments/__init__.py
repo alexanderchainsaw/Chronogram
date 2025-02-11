@@ -1,1 +1,1 @@
-from chronogram.handlers.payments.payments import payments_router
+from .payments import payments_router

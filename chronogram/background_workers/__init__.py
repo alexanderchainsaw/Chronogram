@@ -1,2 +1,2 @@
-from chronogram.background_workers.timecapsule_sender import deliver_timecapsules
-from chronogram.background_workers.subscription_revoker import deadline_notificator, subscription_revoker
+from .timecapsule_sender import deliver_timecapsules
+from .subscription_revoker import deadline_notificator, subscription_revoker

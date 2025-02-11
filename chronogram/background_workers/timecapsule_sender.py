@@ -1,20 +1,20 @@
 import asyncio
 import datetime
 import os
-
 import aiogram.exceptions
 from PIL import Image
 from enum import Enum
-from chronogram.utils import user_space_remaining_percent
-import chronogram.database.requests as db_req
-from chronogram.database.schema import TimeCapsule, ChronogramUser
-from chronogram.database.requests import TimeCapsuleDatabaseActions as TC
 from aiogram.types.input_file import FSInputFile
 from aiogram.filters.callback_data import CallbackData
 from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from ..database import requests as db_req
+from ..middlewares import L10N, get_l10n_by_lang
+from ..database.schema import TimeCapsule, ChronogramUser
+from ..database.requests import TimeCapsuleDatabaseActions as TC
+from ..utils import user_space_remaining_percent
+
 from config import config
-from chronogram.middlewares import L10N, get_l10n_by_lang
 
 
 class KeepOrDeleteCallback(CallbackData, prefix='keep_or_delete'):

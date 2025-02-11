@@ -2,13 +2,12 @@ from aiogram.types import CallbackQuery
 from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
-from chronogram.settings_menu_models import SettingsCallback
 from aiogram.fsm.context import FSMContext
-from chronogram.handlers.settings.settings_menu import (process_selection, start_settings_menu,
-                                                        get_init_settings_msg)
-from chronogram.handlers.settings.utc_picker import process_utc_picker, UtcPickerCallback
-from chronogram.utils import perform_state_clear
-from chronogram.middlewares import L10N
+from ...settings_menu_models import SettingsCallback
+from ...utils import perform_state_clear
+from ...middlewares import L10N
+from .settings_menu import process_selection, start_settings_menu, get_init_settings_msg
+from .utc_picker import process_utc_picker, UtcPickerCallback
 
 settings_router = Router(name='settings_router')
 
