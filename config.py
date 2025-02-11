@@ -31,6 +31,11 @@ class Config:
     BOT = Bot(token=TEST_API_TOKEN if TESTING else PROD_API_TOKEN,
               default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
+    # CONSTANTS
+    SUBSCRIPTION_COST = 150  # in telegram stars
+    DEFAULT_USER_SPACE = 100_000  # 0.1 megabytes
+    PREMIUM_USER_SPACE = 10_000_000  # 10 megabytes
+
     def __post_init__(self):
         for key, val in self.__dict__.items():
             if val is None:
