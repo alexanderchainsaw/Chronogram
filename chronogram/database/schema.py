@@ -1,4 +1,3 @@
-import datetime
 from sqlalchemy import ForeignKey
 from sqlalchemy.dialects.postgresql import (BYTEA, BIGINT, INTEGER, TIMESTAMP, BOOLEAN, CHAR,
                                             VARCHAR)
