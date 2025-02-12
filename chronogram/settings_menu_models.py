@@ -12,5 +12,5 @@ class SettingsMenuActions(str, Enum):
     CLOSE = "CLOSE"
 
 
-class SettingsCallback(CallbackData, prefix='settings'):
+class SettingsCallback(CallbackData, prefix="settings"):
     action: str

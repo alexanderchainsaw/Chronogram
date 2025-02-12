@@ -15,10 +15,10 @@ class StructLoggingMiddleware(BaseMiddleware):
         super().__init__()
 
     async def __call__(
-            self,
-            handler: Callable[[Update, dict[str, Any]], Awaitable[Any]],
-            event: TelegramObject,
-            data: dict[str, Any],
+        self,
+        handler: Callable[[Update, dict[str, Any]], Awaitable[Any]],
+        event: TelegramObject,
+        data: dict[str, Any],
     ) -> Any:
         event = cast(Update, event)
         _started_processing_at = time.time()
@@ -33,17 +33,19 @@ class StructLoggingMiddleware(BaseMiddleware):
             if message.from_user is not None:
                 logger = logger.bind(user_id=f"...{str(message.from_user.id)[5:]}")
             if message.text:
-                logger = logger.bind(text=message.text[:5] + '...', entities=message.entities)
+                logger = logger.bind(
+                    text=message.text[:5] + "...", entities=message.entities
+                )
             if message.video:
                 logger = logger.bind(
-                    caption=message.caption[:5] + '...',
+                    caption=message.caption[:5] + "...",
                     caption_entities=message.caption_entities,
                     video_id=message.video.file_id,
                     video_unique_id=message.video.file_unique_id,
                 )
             if message.photo:
                 logger = logger.bind(
-                    caption=message.caption[:5] + '...',
+                    caption=message.caption[:5] + "...",
                     caption_entities=message.caption_entities,
                     photo_id=message.photo[-1].file_id,
                     photo_unique_id=message.photo[-1].file_unique_id,
@@ -81,7 +83,7 @@ class StructLoggingMiddleware(BaseMiddleware):
             spent_time_ms=round((time.time() - _started_processing_at) * 10000) / 10,
         )
         if event.callback_query:
-            logger = logger.unbind('callback_data')
+            logger = logger.unbind("callback_data")
         if event.message:
             logger.info("Handled message")
         elif event.callback_query:

@@ -8,5 +8,13 @@ from .delete_everything import delete_router
 from .general import general_router
 
 
-routers = (general_router, settings_router, payments_router, inbox_router, admin_router, delete_router,
-           timecapsule_router, common_router)
+routers = (
+    general_router,
+    settings_router,
+    payments_router,
+    inbox_router,
+    admin_router,
+    delete_router,
+    timecapsule_router,
+    common_router,
+)

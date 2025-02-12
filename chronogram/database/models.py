@@ -24,7 +24,7 @@ class InnerChronogramPaymentData:
     tg_transaction_id: str
     xtr_amount: int
     type: str
-    status: str = 'processed'
+    status: str = "processed"
 
 
 @dataclass
@@ -52,8 +52,8 @@ class OuterChronogramUserData:
     space_taken: int = 0
 
     def __post_init__(self) -> None:
-        if self.language not in ('en', 'ru'):
-            raise ValueError(f'Unsupported language: {self.language}')
+        if self.language not in ("en", "ru"):
+            raise ValueError(f"Unsupported language: {self.language}")
 
 
 @dataclass
@@ -64,11 +64,11 @@ class OuterChronogramPaymentData:
     tg_transaction_id: str
     xtr_amount: int
     type: str
-    status: str = 'processed'
+    status: str = "processed"
 
     def __post_init__(self) -> None:
-        if self.type not in ('subscription', 'donation'):
-            raise ValueError(f'Unknown payment type: {self.type}')
+        if self.type not in ("subscription", "donation"):
+            raise ValueError(f"Unknown payment type: {self.type}")
 
 
 @dataclass
@@ -84,6 +84,10 @@ class OuterTimeCapsuleData:
 
     def __post_init__(self) -> None:
         if not self.image and len(self.text_content) > 1600:
-            raise ValueError(f'Text content length exceeds allowed 1600 for text-only: {len(self.text_content)}')
+            raise ValueError(
+                f"Text content length exceeds allowed 1600 for text-only: {len(self.text_content)}"
+            )
         elif self.image and len(self.text_content) > 800:
-            raise ValueError(f'Text content length exceeds allowed 800 for text with image: {len(self.text_content)}')
+            raise ValueError(
+                f"Text content length exceeds allowed 800 for text with image: {len(self.text_content)}"
+            )

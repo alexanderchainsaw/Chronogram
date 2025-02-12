@@ -4,7 +4,12 @@ from collections.abc import Awaitable, Callable
 from typing import Any, Dict
 from aiogram import BaseMiddleware
 from redis import Redis
-from ..database.requests import get_uid_by_tg_uid, add_user_if_not_exists, get_user_attr, ChronogramUser
+from ..database.requests import (
+    get_uid_by_tg_uid,
+    add_user_if_not_exists,
+    get_user_attr,
+    ChronogramUser,
+)
 from .l10n_data import LOC
 
 from config import config
@@ -17,8 +22,8 @@ class L10N:
 
 
 async def get_l10n_by_lang(lang: str):
-    if lang not in ('en', 'ru'):
-        raise RuntimeError('Invalid language')
+    if lang not in ("en", "ru"):
+        raise RuntimeError("Invalid language")
     return L10N(lang=lang, data=LOC[lang])
 
 
@@ -30,19 +35,21 @@ class LocalizationMiddleware(BaseMiddleware):
         self,
         handler: Callable[[Message, Dict[str, Any]], Awaitable[Any]],
         event: Message | CallbackQuery | PreCheckoutQuery,
-        data: Dict[str, Any]
+        data: Dict[str, Any],
     ) -> Any:
         if not (uid := await get_uid_by_tg_uid(event.from_user.id)):
-            await add_user_if_not_exists(tg_uid=event.from_user.id, lang=event.from_user.language_code)
+            await add_user_if_not_exists(
+                tg_uid=event.from_user.id, lang=event.from_user.language_code
+            )
             lang = event.from_user.language_code
-            if lang not in ('en', 'ru'):
-                lang = 'en'
-            data['l10n'] = L10N(data=LOC[lang], lang=lang)
+            if lang not in ("en", "ru"):
+                lang = "en"
+            data["l10n"] = L10N(data=LOC[lang], lang=lang)
             await self.r.set(str(event.from_user.id), lang)
             return await handler(event, data)
         if not (lang := await self.r.get(str(event.from_user.id))):
-            config.LOGGER.info('Not in redis storage, going to db')
+            config.LOGGER.info("Not in redis storage, going to db")
             lang = await get_user_attr(user_id=uid, col=ChronogramUser.language)
             await self.r.set(str(event.from_user.id), lang)
-        data['l10n'] = L10N(data=LOC[lang], lang=lang)
+        data["l10n"] = L10N(data=LOC[lang], lang=lang)
         return await handler(event, data)

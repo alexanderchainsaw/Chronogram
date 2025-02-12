@@ -19,7 +19,9 @@ class PhotoReader:
 
     async def load_image_from_tg(self):
         file_info = await config.BOT.get_file(self.photo[-1].file_id)
-        img = Image.open(io.BytesIO((await config.BOT.download_file(file_info.file_path)).read()))
+        img = Image.open(
+            io.BytesIO((await config.BOT.download_file(file_info.file_path)).read())
+        )
         img.save(self.file_name)
         return FSInputFile(self.file_name)
 
