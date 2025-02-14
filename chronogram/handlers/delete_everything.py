@@ -9,7 +9,7 @@ from ..database import requests as db_req
 from ..utils import get_default_close_button, perform_state_clear
 from ..middlewares import L10N
 
-from ..config import config
+from config import config
 
 delete_router = Router(name="delete_router")
 

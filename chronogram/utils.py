@@ -6,7 +6,7 @@ from .database import requests as db_req
 from .database.schema import ChronogramUser
 from .middlewares.l10n_data import LOC
 
-from .config import config
+from config import config
 
 
 async def get_default_close_button(user_lang) -> InlineKeyboardButton:

@@ -17,7 +17,7 @@ from ...database.requests import TimeCapsuleDatabaseActions as TC
 from ...utils import user_space_remaining_percent, user_space_remaining_mb
 from ...middlewares import L10N
 
-from ...config import config
+from config import config
 
 
 inbox_pic = FSInputFile("media/inbox_pic.jpg")

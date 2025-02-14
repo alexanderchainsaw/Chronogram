@@ -12,7 +12,7 @@ from ...database.schema import ChronogramUser
 from ...settings_menu_models import SettingsCallback, SettingsMenuActions
 from ...middlewares import L10N
 
-from ...config import config
+from config import config
 
 
 @dataclasses.dataclass

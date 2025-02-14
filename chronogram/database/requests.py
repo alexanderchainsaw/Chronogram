@@ -15,7 +15,7 @@ from .schema import async_session
 from .schema import ChronogramUser, TimeCapsule, ChronogramPayment
 from .schema import tc_image_data
 
-from ..config import config
+from config import config
 
 
 fernet = config.FERNET

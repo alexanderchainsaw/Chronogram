@@ -14,7 +14,7 @@ from ..database.schema import TimeCapsule, ChronogramUser
 from ..database.requests import TimeCapsuleDatabaseActions as TC
 from ..utils import user_space_remaining_percent
 
-from ..config import config
+from config import config
 
 
 class KeepOrDeleteCallback(CallbackData, prefix="keep_or_delete"):

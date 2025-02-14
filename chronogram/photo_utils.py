@@ -4,7 +4,7 @@ import os
 import io
 from PIL import Image
 
-from .config import config
+from config import config
 
 
 class PhotoReader:
