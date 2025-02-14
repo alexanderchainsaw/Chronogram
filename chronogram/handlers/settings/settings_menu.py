@@ -10,7 +10,7 @@ from ...middlewares import L10N, get_l10n_by_lang
 from ..payments.schemas import SubscriptionMenuCallback, choose_duration_menu
 from .utc_picker import start_utc_picker, UtcPickerCallback
 
-from config import config
+from ...config import config
 
 
 async def get_init_settings_msg(tg_uid, l10n: L10N) -> str:

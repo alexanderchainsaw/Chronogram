@@ -3,19 +3,20 @@ from aiogram.methods import DeleteWebhook
 from aiogram import Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import CallbackQuery
-from config import config
-from chronogram.middlewares import StructLoggingMiddleware, LocalizationMiddleware, L10N
-from chronogram.database import async_main as init_postgresql
-from chronogram.handlers import routers
-from chronogram.background_workers.timecapsule_sender import (
+from .middlewares import StructLoggingMiddleware, LocalizationMiddleware, L10N
+from .database import async_main as init_postgresql
+from .handlers import routers
+from .background_workers.timecapsule_sender import (
     KeepOrDeleteCallback,
     process_selection,
 )
-from chronogram.background_workers import (
+from .background_workers import (
     subscription_revoker,
     deliver_timecapsules,
     deadline_notificator,
 )
+
+from config import config
 
 
 async def main():

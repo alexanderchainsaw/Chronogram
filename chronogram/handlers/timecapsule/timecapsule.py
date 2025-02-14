@@ -34,7 +34,7 @@ from .helpers import (
 from .aiogram3_simplecalendar import SimpleCalendar, SimpleCalendarCallback
 from .timepicker_bigstep import process_selection, start_timepicker, TimepickerCallback
 
-from config import config
+from ...config import config
 
 timecapsule_router = Router(name="timecapsule_router")
 

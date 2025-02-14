@@ -12,7 +12,7 @@ from ..database.requests import (
 )
 from .l10n_data import LOC
 
-from config import config
+from ..config import config
 
 
 @dataclasses.dataclass

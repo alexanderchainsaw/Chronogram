@@ -3,7 +3,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from ..database import requests as db_req
 from ..middlewares.l10n_data import LOC
 
-from config import config
+from ..config import config
 
 
 async def deadline_notificator():

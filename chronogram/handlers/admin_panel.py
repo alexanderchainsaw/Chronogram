@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 from ..database import requests as db_req
 from ..utils import get_default_close_button, perform_state_clear
 
-from config import config
+from ..config import config
 
 admin_router = Router(name="admin_router")
 
