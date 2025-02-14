@@ -5,6 +5,7 @@ description = ""
 authors = ["alexanderchainsaw <alexanderkolesov.contact@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -12,19 +13,22 @@ aiogram = "3.13.1"
 python-dotenv = "^1.0.1"
 sqlalchemy = "^2.0.36"
 structlog = "^24.4.0"
-pytest = "^8.3.3"
 python-dateutil = "^2.9.0.post0"
 asyncpg = "^0.30.0"
 pillow = "^11.0.0"
 parse = "^1.20.2"
 cryptography = "^44.0.1"
-pytest-asyncio = "^0.24.0"
 alembic = "^1.13.3"
 aiohttp = "3.10.11"
 redis = "^5.2.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-asyncio = "^0.24.0"
+
 black = "^25.1.0"
 ruff = "^0.9.6"
-
 
 [build-system]
 requires = ["poetry-core"]
