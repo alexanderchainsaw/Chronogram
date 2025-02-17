@@ -35,7 +35,6 @@ class TimepickerCallback(CallbackData, prefix="timepicker"):
 async def start_timepicker(
     data: TimepickerCallback, l10n: L10N
 ) -> InlineKeyboardMarkup:
-
     keyboard = [[], [], [], []]
 
     keyboard[0] = [
@@ -124,7 +123,6 @@ def process_time_change(
 async def process_selection(
     callback: CallbackQuery, data: TimepickerCallback, l10n: L10N
 ):
-
     selected, selected_time, canceled = (
         False,
         time(hour=data.hour, minute=data.minute),

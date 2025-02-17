@@ -11,4 +11,5 @@ test:
 lint:
 	poetry run black ${PROJECT_FOLDER}
 	poetry run ruff check ${PROJECT_FOLDER}
+	poetry run ruff format ${PROJECT_FOLDER}
 run: down test lint build up

@@ -123,7 +123,6 @@ async def process_utc_picker(
 
 
 async def start_utc_picker(data: UtcPickerCallback, l10n: L10N) -> InlineKeyboardMarkup:
-
     keyboard = [[], [], [], [], []]
 
     keyboard[0] = [

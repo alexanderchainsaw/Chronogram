@@ -66,7 +66,7 @@ EN: dict[str, str] = {
     },
     "/refund": {
         "no_refunds": "Refunds are not available with this bot",
-        "usage": "<b>Refund usage</b>\n\n" "<code>/refund *ID of transaction*</code>",
+        "usage": "<b>Refund usage</b>\n\n<code>/refund *ID of transaction*</code>",
         "invalid_tid": "Invalid transaction ID",
         "non_refund": "subscriptions are non refundable",
         "24passed": "This payment was made more than 24 hour ago",

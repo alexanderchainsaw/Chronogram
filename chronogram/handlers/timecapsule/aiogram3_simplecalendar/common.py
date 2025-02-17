@@ -3,7 +3,6 @@ from datetime import datetime
 
 
 class GenericCalendar:
-
     def __init__(
         self,
         locale: str = None,
@@ -78,13 +77,13 @@ class GenericCalendar:
         date = datetime(int(data.year), int(data.month), int(data.day))
         if self.min_date and self.min_date > date:
             await query.answer(
-                f'The date have to be later {self.min_date.strftime("%d/%m/%Y")}',
+                f"The date have to be later {self.min_date.strftime('%d/%m/%Y')}",
                 show_alert=self.show_alerts,
             )
             return False, None
         elif self.max_date and self.max_date < date:
             await query.answer(
-                f'The date have to be before {self.max_date.strftime("%d/%m/%Y")}',
+                f"The date have to be before {self.max_date.strftime('%d/%m/%Y')}",
                 show_alert=self.show_alerts,
             )
             return False, None

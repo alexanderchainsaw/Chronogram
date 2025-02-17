@@ -64,7 +64,6 @@ async def add_user_if_not_exists(tg_uid: int, lang: str) -> bool:
 
 
 class TimeCapsuleDatabaseActions:
-
     @staticmethod
     async def get_timecapsules_to_send() -> list[TimeCapsule]:
         async with async_session() as session:
@@ -526,7 +525,6 @@ async def process_payment(
 
 async def get_stats() -> tuple[int, int, int]:
     async with async_session() as session:
-
         total_users = (
             await session.execute(select(func.count(ChronogramUser.id)))
         ).scalar_one()

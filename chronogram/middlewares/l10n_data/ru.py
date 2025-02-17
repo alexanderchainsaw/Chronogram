@@ -66,7 +66,7 @@ RU: dict[str, str] = {
     },
     "/refund": {
         "no_refunds": "Все платежи этому боту не подлежат возврату.",
-        "usage": "<b>Refund usage</b>\n\n" "<code>/refund *ID of transaction*</code>",
+        "usage": "<b>Refund usage</b>\n\n<code>/refund *ID of transaction*</code>",
         "invalid_tid": "Invalid transaction ID",
         "non_refund": "subscriptions are non refundable",
         "24passed": "This payment was made more than 24 hour ago",
@@ -159,7 +159,7 @@ RU: dict[str, str] = {
         "buy_prolong": "Купить\\Продлить",
     },
     "/subscription": {
-        "init_subscribed": "<b>Подписка</b>" "\n\nВаша подписка истечёт <b>{}</b>\n\n",
+        "init_subscribed": "<b>Подписка</b>\n\nВаша подписка истечёт <b>{}</b>\n\n",
         "init_standard": "<b>Подписка</b>\n\n",
         "info": "You can subscribe to ChronoPremium for 150⭐️(a month) to get 10MB available "
         "storage for your time "

@@ -81,7 +81,6 @@ async def get_formatted_msg_content(
 
 
 async def send_timecapsule(tg_uid, sent, content, tc_id, photo, l10n: L10N):
-
     if photo:
         photo_data = await TC.get_timecapsule_image_data(tg_uid=tg_uid, tc_id=tc_id)
         img = Image.frombytes(
