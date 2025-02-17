@@ -39,7 +39,7 @@ class ChronogramUser(Base):
         TIMESTAMP, default=None, nullable=True
     )
     notified_deadline: Mapped[BOOLEAN] = mapped_column(BOOLEAN, default=False)
-    space_available: Mapped[INTEGER] = mapped_column(INTEGER, default=100000)
+    space_available: Mapped[INTEGER] = mapped_column(INTEGER, default=config.DEFAULT_USER_SPACE)
     space_taken: Mapped[INTEGER] = mapped_column(INTEGER, default=0)
 
     def __repr__(self):
