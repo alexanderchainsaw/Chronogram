@@ -15,45 +15,50 @@
 4. The experience is designed to be surprising and impactful, allowing users to reconnect with their past selves in unexpected ways.
 
 ## Commands
-## <p align="center">/start</p>
+- ### `/start` - Start the bot
+<br>
 
-## <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/start.png?raw=true)</p>
+- ### `/timecapsule` - Start the timecapsule creation process
+  - #### User is prompted for content (text and/or image) with some limitations
+  - #### User is prompted from date and time of delivery, then for confirmation
+<br>
 
-## <p align="center">/timecapsule</p>
-#### <p align="center">Starts a time capsule creation process</p>
-#### <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/timecapsule_1.png?raw=true)</p>
+- ### `/settings` - Open settings menu
+  - #### Displays all user information (Language, Timezone, Storage capacity, Subscription status)
+  - #### Nested menu for purchasing/prolonging subscription
+  - #### Nested menus to change timezone and language
+<br>
 
-#### <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/timecapsule_2.png?raw=true)</p>
+- ### `/help` - Shows available commands
+<br>
 
-#### <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/timecapsule_3.png?raw=true)</p>
+- ### `/about` - About the bot
+<br>
 
-## <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/timecapsule_4.png?raw=true)</p>
+- ### `/delete_everything` - Delete all outgoing/received timecapsules
+  - #### In order to avoid accidental deletion, user will be prompted to type a special phrase to confirm deletion
+<br>
 
-## <p align="center"> /settings</p>
-#### <p align="center">Opens an interactive inline menu, showing user's settings and statistics (timezone, language, subscription status, space available)</p>
-#### <p align="center"> ![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/settings_1.png?raw=true)</p>
-#### <p align="center">Buy/Prolong Subscription:</p>
-#### <p align="center"> ![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/settings_2.png?raw=true)</p>
-#### <p align="center">Switch language</p>
-#### <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/settings_3.png?raw=true)</p>
-#### <p align="center">Switch timezone</p>
-## <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/settings_4.png?raw=true)</p>
+- ### `/inbox` - Opens an interactive menu to explore all received timecapsules
+<br>
 
+- ### `/donate` - Donate any amount of Telegram Stars to the bot
+<br>
 
+- ### `/paysupport` - Info about payments/refunds
 
-##  <p align="center">/help</p>
-#### <p align="center">Shows available commands with explanations</p>
-## <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/help.png?raw=true)</p>
+## Admin commands
 
-##  <p align="center">/about</p>
-## <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/about.png?raw=true)</p>
+- ### `/admin` - Shows available admin commands
+<br>
 
-##  <p align="center">/inbox</p>
-#### <p align="center">Opens a menu with pagination showing your received time capsules</p>
-## <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/inbox.png?raw=true)</p>
+- ### `/admin_stats` - Some stats (total users, subscriptions bought, subscriptions active)
+<br>
 
-##  <p align="center">/donate</p>
-## <p align="center">![image](https://github.com/alexanderchainsaw/Chronogram/blob/main/demo/donate.png?raw=true)</p>
+- ### `/admin_message` - Send a message to one of the users of the bot
+<br>
 
+- ### `/forcerefund` - Refund a purchase made in this bot
+<br>
 
-
+- ### `/gift_sub` - Gift a subscription to a user
