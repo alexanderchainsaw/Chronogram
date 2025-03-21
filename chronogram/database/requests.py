@@ -539,7 +539,7 @@ async def get_stats() -> tuple[int, int, int]:
 
         subs_now = (
             await session.execute(
-                func.count(select(ChronogramUser.id)).where(
+                select(func.count(ChronogramUser.id)).where(
                     ChronogramUser.subscription == True
                 )
             )
