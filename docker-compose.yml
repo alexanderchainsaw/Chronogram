@@ -7,10 +7,15 @@ services:
       - POSTGRES_USER=${PG_LOGIN}
       - POSTGRES_PASSWORD=${PG_PASS}
       - POSTGRES_DB=${PG_DB_NAME}
-    ports:
-      - '5432:5432'
+    # ports:
+    #   - '5432:5432'
     volumes:
       - ./db:/var/lib/postgresql/data
+    logging:
+      driver: json-file
+      options:
+        max-size: "1m"
+        max-file: "5"
   api:
     platform: linux/amd64
     environment:
@@ -34,6 +39,11 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
+    logging:
+      driver: json-file
+      options:
+        max-size: "1m"
+        max-file: "5"
   redis:
     image: redis:latest
     container_name: redis_container
@@ -43,8 +53,8 @@ services:
       - REDIS_USER_PASSWORD=${REDIS_USER_PASSWORD}
     depends_on:
       - api
-    ports:
-      - "6379:6379"
+    # ports:
+    #   - "6379:6379"
     volumes:
       - ./redisdata:/data
     deploy:
@@ -74,3 +84,8 @@ services:
     restart: unless-stopped
     tty: true
     stdin_open: true
+    logging:
+      driver: json-file
+      options:
+        max-size: "1m"
+        max-file: "5"
